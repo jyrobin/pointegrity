@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Favicon — SVG master. Modern browsers (Chrome, Firefox, Edge,
-  Safari 17+) render this directly in the tab.
+  Favicon — SVG master. Same composition as mark-pi.svg; identical
+  glyph coords and accent-dot position so the favicon reads as the
+  same mark the rest of the brand uses.
 
-  Uses Inter via system font stack. At favicon sizes (16-32px),
-  font-metric differences between Inter and fallback sans fonts are
-  imperceptible. If exact rendering matters in a future context,
-  the PNG rasters alongside this file were generated from a page
-  that loaded real Inter from Google Fonts.
+  Font stack starts with Inter then falls back to system-ui. On
+  systems without Inter the browser uses SF Pro (macOS) or Segoe UI
+  (Windows). Accent-dot cx/cy values were tuned against the
+  system-fallback rendering, so the live SVG and our PNG rasters
+  (rendered with the same stack, no external Inter load) align.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160"
      role="img" aria-label="π — Pointegrity">
