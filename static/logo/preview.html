@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pointegrity — Logo variants preview</title>
+  <title>Pointegrity — Logo (red)</title>
 
   <link rel="stylesheet" href="/static/motif/tokens.css">
   <link rel="stylesheet" href="/static/motif/components.css">
@@ -44,7 +44,6 @@
       gap: 1.5rem;
       flex-wrap: wrap;
     }
-    .specimen .frame.dark { background: var(--color-neutral-900); }
     .specimen img { height: 72px; }
     .specimen img.mark { height: 72px; width: 72px; }
     .specimen img.tiny { height: 28px; }
@@ -64,107 +63,47 @@
       border-bottom: 1px solid var(--color-neutral-200);
     }
     .section-title:first-of-type { margin-top: 0; }
-
-    .note-block {
-      background: #fff7e6;
-      border: 1px solid #ffd98a;
-      border-radius: var(--radius-md);
-      padding: 1rem 1.25rem;
-      font-size: var(--text-sm);
-      color: #92400e;
-      margin-bottom: 2rem;
-    }
-    .note-block strong { color: #7c3d07; }
   </style>
 </head>
 <body>
 
 <div class="preview-wrap">
-  <h1>Pointegrity — Logo variants</h1>
+  <h1>Pointegrity — brand assets</h1>
   <p class="intro">
-    Draft wordmarks and marks for review. Pick a primary; I can
-    refine from there. All files live in <code>static/logo/</code>.
+    Red single-dot direction, chosen. This page renders the committed
+    SVGs for reference. Tune positioning on any file by editing the
+    <code>cx</code> attribute on the accent circle.
   </p>
 
-  <div class="note-block">
-    <strong>Tuning note:</strong> These SVGs use a dotless
-    <code>ı</code> in the text plus an overlaid
-    <code>&lt;circle&gt;</code> for the accent dot. Exact horizontal
-    position of the dot depends on the rendering font; on most
-    systems Inter is used. If a dot looks 1-2 px off above its stem,
-    nudge <code>cx</code> in the SVG directly. For print/export, open
-    in Figma or Inkscape and <em>convert text to paths</em> before
-    shipping.
-  </div>
-
-  <h2 class="section-title">Wordmarks — single accent dot</h2>
+  <h2 class="section-title">Primary wordmark</h2>
 
   <div class="specimen">
-    <h3>Green accent — canonical</h3>
-    <p class="note">Matches pouch's primary palette. My recommended default.</p>
-    <div class="frame"><img src="wordmark-green.svg" alt="Pointegrity, green dot"></div>
-    <div class="filename">wordmark-green.svg</div>
-  </div>
-
-  <div class="specimen">
-    <h3>Red accent</h3>
-    <p class="note">Warmer, more visible. Differentiates Pointegrity from pouch when both brands appear together.</p>
-    <div class="frame"><img src="wordmark-red.svg" alt="Pointegrity, red dot"></div>
+    <h3>Pointegrity</h3>
+    <p class="note">Single red dot on the first 'i'. Use on all marketing surfaces.</p>
+    <div class="frame"><img src="wordmark-red.svg" alt="Pointegrity"></div>
     <div class="filename">wordmark-red.svg</div>
   </div>
 
-  <h2 class="section-title">Wordmarks — dots on both i's</h2>
-  <p class="intro" style="margin-top:-0.5rem;">Symmetric, emphasizes the point+integrity pun.</p>
-
   <div class="specimen">
-    <h3>Both dots green</h3>
-    <div class="frame"><img src="wordmark-both-green.svg" alt="Pointegrity with two green dots"></div>
-    <div class="filename">wordmark-both-green.svg</div>
-  </div>
-
-  <div class="specimen">
-    <h3>Both dots red</h3>
-    <p class="note">Most expressive variant. The two reds carry visual weight.</p>
-    <div class="frame"><img src="wordmark-both-red.svg" alt="Pointegrity with two red dots"></div>
-    <div class="filename">wordmark-both-red.svg</div>
-  </div>
-
-  <h2 class="section-title">Monochrome</h2>
-
-  <div class="specimen">
-    <h3>Ink only — no accent</h3>
-    <p class="note">For fax, print, embroidery, single-color backgrounds.</p>
+    <h3>Monochrome (ink-only)</h3>
+    <p class="note">Fallback for fax / print / embroidery / single-color contexts.</p>
     <div class="frame"><img src="wordmark-mono.svg" alt="Pointegrity monochrome"></div>
     <div class="filename">wordmark-mono.svg</div>
   </div>
 
   <h2 class="section-title">Standalone Pi mark</h2>
-  <p class="intro" style="margin-top:-0.5rem;">Use as favicon, avatar, app icon.</p>
 
   <div class="specimen">
-    <h3>Pi — red dot</h3>
+    <h3>Pi</h3>
+    <p class="note">For favicon, avatar, app icon. Shown at display size and at small size.</p>
     <div class="frame">
-      <img src="mark-pi.svg" class="mark" alt="Pi mark, red">
-      <img src="mark-pi.svg" class="tiny" alt="Pi mark at tiny size">
+      <img src="mark-pi.svg" class="mark" alt="Pi mark">
+      <img src="mark-pi.svg" class="tiny" alt="Pi mark small">
     </div>
     <div class="filename">mark-pi.svg</div>
   </div>
 
-  <div class="specimen">
-    <h3>Pi — green dot</h3>
-    <div class="frame">
-      <img src="mark-pi-green.svg" class="mark" alt="Pi mark, green">
-      <img src="mark-pi-green.svg" class="tiny" alt="Pi mark, green at tiny size">
-    </div>
-    <div class="filename">mark-pi-green.svg</div>
-  </div>
-
-  <h2 class="section-title">Composite pattern — Pi · &lt;product&gt;</h2>
-  <p class="intro" style="margin-top:-0.5rem;">
-    Template for sub-product branding. Pi on the left identifies the
-    Pointegrity family; the name on the right identifies the product.
-    Adjust to taste when each product gets its own brand identity.
-  </p>
+  <h2 class="section-title">Sub-product pattern — Pi · &lt;product&gt;</h2>
 
   <div class="specimen">
     <h3>Pi · Pouch</h3>
@@ -174,27 +113,27 @@
 
   <div class="specimen">
     <h3>Pi · POI</h3>
-    <p class="note">POI = Project Orientation &amp; Intelligence. Also a recursive nod: "pi" already contains P-O-I.</p>
+    <p class="note">POI = Project Orientation &amp; Intelligence.</p>
     <div class="frame"><img src="composite-pi-poi.svg" alt="Pi · POI"></div>
     <div class="filename">composite-pi-poi.svg</div>
   </div>
 
-  <h2 class="section-title">Context — how it looks in the wild</h2>
+  <h2 class="section-title">Context — header / small / dark</h2>
 
   <div class="specimen">
-    <h3>In navigation (small size)</h3>
+    <h3>Small size — header brand</h3>
     <div class="frame">
-      <img src="wordmark-green.svg" class="tiny" alt="">
-      <span style="color: var(--color-neutral-500);">→ header brand</span>
+      <img src="wordmark-red.svg" class="tiny" alt="">
+      <span style="color: var(--color-neutral-500);">height: 28px</span>
     </div>
   </div>
 
   <div class="specimen">
-    <h3>Mark on dark background</h3>
-    <p class="note">Note: mark currently uses dark ink. For dark-background use, we'd make an inverted version (ink → white).</p>
-    <div class="frame dark">
+    <h3>On dark background (inverted via CSS filter)</h3>
+    <p class="note">Temporary proof of concept — a proper inverted SVG would have ink = white instead of relying on filter.</p>
+    <div class="frame" style="background: var(--color-neutral-900);">
       <img src="mark-pi.svg" class="mark" alt="" style="filter: invert(1);">
-      <span style="color: #aaa;">filter: invert(1) — proof of concept</span>
+      <img src="wordmark-red.svg" alt="" style="filter: invert(1);">
     </div>
   </div>
 
