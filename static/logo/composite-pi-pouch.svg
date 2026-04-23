@@ -5,32 +5,38 @@
   identifies the Pointegrity family; the middot separator + product
   name on the right identifies the specific product.
 
-  Use anywhere you'd want "by Pointegrity" context, e.g. a demo
-  header, a sales deck, or marketing copy where a product's parent
-  company matters.
+  Typography: IBM Plex Sans (matches the brand typeface set by
+  brand.css). Weight 700 is Plex's heaviest; do not use 800 (browsers
+  synthesize a thicker faux-bold when that weight isn't available,
+  which renders inconsistently across Chrome/Safari/Firefox).
 
-  To use for another product: swap "pouch" for the product name and
-  adjust the total width if needed.
+  Still text-based (not font-locked). Renders correctly wherever
+  Plex is loaded (any page linking brand.css). For external embeds
+  in contexts that don't load Plex, use PNG renders or extend
+  _extract.py to emit path-based composites.
+
+  To reuse for another product: swap "pouch" for the product name
+  and adjust x-position + viewBox width if the new name is longer.
 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 140"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 140"
      role="img" aria-label="Pi · Pouch">
   <defs>
     <style><![CDATA[
       .pi {
-        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
-        font-weight: 800;
+        font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        font-weight: 700;
         font-size: 88px;
         letter-spacing: -0.04em;
         fill: #1e2f14;
       }
       .sep {
-        font-family: 'Inter', system-ui, sans-serif;
+        font-family: 'IBM Plex Sans', system-ui, sans-serif;
         font-weight: 400;
         font-size: 64px;
         fill: #9ca3af;
       }
       .product {
-        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
+        font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
         font-weight: 600;
         font-size: 80px;
         letter-spacing: -0.02em;
@@ -39,7 +45,7 @@
     ]]></style>
   </defs>
   <text x="20" y="100" class="pi">pı</text>
-  <circle cx="82" cy="40" r="9" fill="#dc2626"/>
-  <text x="125" y="92" class="sep">·</text>
-  <text x="165" y="100" class="product">pouch</text>
+  <circle cx="86" cy="40" r="9" fill="#dc2626"/>
+  <text x="115" y="92" class="sep">·</text>
+  <text x="140" y="100" class="product">pouch</text>
 </svg>
