@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pouch — product showcase — Pointegrity</title>
+  <meta name="description" content="Screenshots of Pouch, the personal data relay from Pointegrity — capture, organize with streams, auto-expire, retrieve fast.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <style>
+    body { padding: 0; }
+    .showcase-wrap { max-width: 64rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+    .intro { margin: 0 0 3rem; max-width: 40rem; }
+    .intro h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 500;       /* Plex Medium */
+      color: var(--color-primary-800);
+      letter-spacing: -0.02em;
+      margin: 0 0 0.5rem;
+    }
+    .intro p {
+      color: var(--color-neutral-700);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      margin: 0 0 0.75rem;
+    }
+    .intro .meta {
+      color: var(--color-neutral-500);
+      font-size: var(--text-sm);
+      margin-top: 1rem;
+    }
+    .intro .meta a { color: var(--color-primary-700); }
+
+    .shot {
+      background: var(--color-card-bg, #fff);
+      border: 1px solid var(--color-border, #e5e5e5);
+      border-radius: var(--radius-lg, 0.75rem);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+    .shot h2 {
+      margin: 0 0 0.25rem;
+      font-size: 1.2rem;
+      color: var(--color-primary-700);
+      letter-spacing: -0.01em;
+    }
+    .shot p.caption {
+      margin: 0 0 1.25rem;
+      color: var(--color-neutral-700);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      max-width: 40rem;
+    }
+    .shot img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-neutral-100);
+    }
+
+    .twocol {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 767px) {
+      .twocol { grid-template-columns: 1fr; }
+    }
+    .twocol .shot { margin-bottom: 0; }
+
+    .kicker {
+      display: inline-block;
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.25rem;
+    }
+
+    /* CLI snippet */
+    .cli {
+      background: var(--color-neutral-900, #1e2f14);
+      color: #e5e5e5;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 0;
+    }
+    .cli .prompt { color: #9ca3af; }
+    .cli .cmd { color: #fcd34d; }
+    .cli .out  { color: #a7f3d0; }
+    .cli .dim  { color: #6b7280; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<div class="showcase-wrap">
+
+  <section class="intro">
+    <div class="kicker">Product showcase</div>
+    <h1>Pouch — a personal data relay</h1>
+    <p>
+      Pouch is the Pointegrity flagship: a subscription app that lets individuals
+      capture, organize, and retrieve their personal data across devices.
+      <strong>Ephemeral by default, durable by opt-in, yours to own.</strong>
+    </p>
+    <p>
+      The screenshots below are from a working build. Commercial launch is on
+      approval of payment processing; pricing is <strong>$8/month or $72/year</strong>
+      (single tier) with a 14-day trial.
+    </p>
+    <p class="meta">
+      Product URL: <a href="https://pouch.pointegrity.com">pouch.pointegrity.com</a>
+      · Pricing: <a href="https://pouch.pointegrity.com/pricing">/pricing</a>
+      · About: <a href="/about">pointegrity.com/about</a>
+      · Contact: <a href="mailto:hello@pointegrity.com">hello@pointegrity.com</a>
+    </p>
+  </section>
+
+  <div class="shot">
+    <div class="kicker">Main view</div>
+    <h2>Capture, search, and review</h2>
+    <p class="caption">
+      The primary workspace. Sidebar groups drops by <em>stream</em> (inbox vs kept),
+      date, tag, and source. Each drop shows its title, tags, stream, origin, and
+      creation time. Long drops collapse to a preview with a "show more" affordance.
+    </p>
+    <img src="shots/01-list-view.png" alt="Pouch list view — sidebar with streams, tags, sources; cards with tags, stream chip, source, time">
+  </div>
+
+  <div class="twocol">
+    <div class="shot">
+      <div class="kicker">Density</div>
+      <h2>Compact row view</h2>
+      <p class="caption">
+        One-line rows with a checkbox for bulk action. Good for scanning large
+        collections or selecting multiples to archive or move.
+      </p>
+      <img src="shots/02-compact-view.png" alt="Pouch compact view — one-line rows with checkbox, stream chip, tags">
+    </div>
+    <div class="shot">
+      <div class="kicker">Inline detail</div>
+      <h2>Click a row to expand</h2>
+      <p class="caption">
+        Body renders inline. Long content is capped with a soft fade and a
+        "show more" button — no modal, no route change.
+      </p>
+      <img src="shots/03-compact-expanded.png" alt="Compact row expanded inline with markdown body preview">
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="kicker">Capture</div>
+    <h2>New-drop drawer — minimum ceremony</h2>
+    <p class="caption">
+      A slide-in form on the right. Required: label + body. Optional: tags,
+      stream (<em>inbox</em> ephemeral vs <em>kept</em> durable), and a
+      time-to-live preset (1h / 1d / 7d / 30d / keep forever). Drag-and-drop
+      onto the page pre-fills the form from the dropped content.
+    </p>
+    <img src="shots/04-drawer.png" alt="New drop drawer with label, tags, body, stream picker, TTL preset pills">
+  </div>
+
+  <div class="shot">
+    <div class="kicker">Ephemeral by default</div>
+    <h2>TTL as a first-class concept</h2>
+    <p class="caption">
+      Every drop can expire on a schedule you set. Cards show a ⏳ badge
+      with the remaining lifetime (red when under 24 h, amber when ≤ 3 days).
+      Pouch quietly sweeps expired drops on a cron; nothing sits forever
+      unless you explicitly promote it to the <em>kept</em> stream.
+    </p>
+    <img src="shots/05-ttl-badges.png" alt="Cards with expiry badges — red 11h, neutral 6d and 29d">
+  </div>
+
+  <div class="twocol">
+    <div class="shot">
+      <div class="kicker">Filter</div>
+      <h2>"Expiring soon" bucket</h2>
+      <p class="caption">
+        Sidebar auto-populates an <em>Expiring soon</em> filter showing only
+        drops within 3 days of expiry — so nothing important lapses quietly.
+      </p>
+      <img src="shots/06-expiring-filter.png" alt="Sidebar showing Expiring soon filter active">
+    </div>
+    <div class="shot">
+      <div class="kicker">Durable opt-in</div>
+      <h2>The "kept" stream</h2>
+      <p class="caption">
+        Drops you promote to <em>kept</em> don't expire. Separate stream lane
+        so archival items aren't cluttered by transient captures.
+      </p>
+      <img src="shots/07-stream-kept.png" alt="Kept stream filter active — 4 durable drops listed">
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="kicker">CLI-first</div>
+    <h2>Equally usable from the terminal</h2>
+    <p class="caption">
+      Pouch ships a first-class CLI. The same streams, tags, and TTL
+      options available in the web UI are also available via
+      <code>pouch put</code>, <code>pouch ls</code>, <code>pouch mv</code>.
+    </p>
+    <pre class="cli"><span class="prompt">$</span> <span class="cmd">echo 'demo recap' | pouch put --stdin --label 'sprint demo' --tag notes,team --stream kept</span>
+<span class="out">itm-a9f31c8b02</span>
+
+<span class="prompt">$</span> <span class="cmd">pouch ls --stream kept</span>
+<span class="out">itm-a9f31c8b02  2026-04-23 22:15  kept  notes,team       sprint demo
+itm-long-show…  2026-04-23 11:12  kept  notes,auth       cookie SSO writeup
+itm-6b3663e52…  2026-04-22 01:42  kept  planning         2026 goals</span>
+
+<span class="prompt">$</span> <span class="cmd">pouch status</span>
+<span class="out">server:   https://pouch.pointegrity.com
+auth:     jy (admin)  expires in 29 days
+sub:      trial (13 days left)</span>
+</pre>
+  </div>
+
+  <div class="shot">
+    <div class="kicker">Pricing</div>
+    <h2>Paid from day one — one plan, clear terms</h2>
+    <p class="caption">
+      Public pricing page. No free tier; 14-day trial, no credit card required
+      to start. Full Terms of Service and Privacy Policy published at
+      <a href="/legal/terms">/legal/terms</a> and <a href="/legal/privacy">/legal/privacy</a>.
+    </p>
+    <img src="shots/08-pricing.png" alt="Pricing page showing $8/mo or $72/yr Personal tier + feature list">
+  </div>
+
+</div>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+      <a href="/legal/terms">Terms</a>
+      <a href="/legal/privacy">Privacy</a>
+      <a href="mailto:hello@pointegrity.com">hello@pointegrity.com</a>
+    </div>
+  </div>
+  <p class="foot-copy">&copy; 2026 Pointegrity. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

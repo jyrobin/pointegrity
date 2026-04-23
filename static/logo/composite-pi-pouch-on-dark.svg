@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Pi · Pouch — inverted for dark backgrounds.
+  Same geometry as composite-pi-pouch.svg; text fills flipped to
+  white-on-dark. Use in any context where the host bg is dark
+  (e.g. motif's navbar primary-600).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 140"
+     role="img" aria-label="Pi · Pouch">
+  <defs>
+    <style><![CDATA[
+      .pi {
+        font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        font-weight: 700;
+        font-size: 88px;
+        fill: #fff;
+      }
+      .sep {
+        font-family: 'IBM Plex Sans', system-ui, sans-serif;
+        font-weight: 400;
+        font-size: 64px;
+        fill: rgba(255,255,255,0.45);
+      }
+      .product {
+        font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        font-weight: 500;
+        font-size: 80px;
+        letter-spacing: -0.02em;
+        fill: rgba(255,255,255,0.95);
+      }
+    ]]></style>
+  </defs>
+  <text x="20" y="100" class="pi">pı</text>
+  <circle cx="84" cy="40" r="9" fill="#dc2626"/>
+  <text x="108" y="93" class="sep">·</text>
+  <text x="135" y="100" class="product">pouch</text>
+</svg>
