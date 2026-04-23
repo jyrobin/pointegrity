@@ -1,0 +1,203 @@
+/* pointegrity-brand — shared brand layer for the Pointegrity family.
+ *
+ * Load order, on every page:
+ *   1. motif/tokens.css       — base design tokens (colors, spacing)
+ *   2. motif/components.css   — base component classes
+ *   3. motif/utilities.css    — utility classes
+ *   4. brand.css              — THIS FILE (overrides + brand tokens)
+ *   5. site.css / app.css     — page- or app-specific styles
+ *
+ * Cross-domain use (for pouch.pointegrity.com, shop.pointegrity.com,
+ * future products): link to this file as
+ *   <link rel="stylesheet"
+ *         href="https://www.pointegrity.com/static/brand.css?v=1">
+ */
+
+/* ============================================================
+ * Typography — IBM Plex family, self-hosted.
+ * Static woff2s live under /static/fonts/; each @font-face below
+ * points at one specific weight + style from that directory.
+ * ============================================================ */
+
+/* --- IBM Plex Sans (UI chrome, display, short text) ---
+ *
+ * One @font-face per (weight × subset). unicode-range tells the
+ * browser which subset to load for a given character, so users
+ * only download the bytes they need. Latin-ext covers European
+ * diacritics (é, ü, ą etc.); latin covers basic ASCII + the
+ * dotless ı we use in the logo.
+ */
+
+/* Plex Sans 400 */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/static/fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+                 U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/static/fonts/ibm-plex-sans-latin-ext-400-normal.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F,
+                 U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF,
+                 U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Plex Sans 500 */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/static/fonts/ibm-plex-sans-latin-500-normal.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+                 U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/static/fonts/ibm-plex-sans-latin-ext-500-normal.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F,
+                 U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF,
+                 U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Plex Sans 600 */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/static/fonts/ibm-plex-sans-latin-600-normal.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+                 U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/static/fonts/ibm-plex-sans-latin-ext-600-normal.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F,
+                 U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF,
+                 U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Plex Sans 700 */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/static/fonts/ibm-plex-sans-latin-700-normal.woff2') format('woff2');
+  font-weight: 700; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+                 U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/static/fonts/ibm-plex-sans-latin-ext-700-normal.woff2') format('woff2');
+  font-weight: 700; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F,
+                 U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF,
+                 U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* --- IBM Plex Serif (long-form editorial, journal, tutorials) --- */
+@font-face {
+  font-family: 'IBM Plex Serif';
+  src: url('/static/fonts/ibm-plex-serif-latin-400-normal.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'IBM Plex Serif';
+  src: url('/static/fonts/ibm-plex-serif-latin-500-normal.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'IBM Plex Serif';
+  src: url('/static/fonts/ibm-plex-serif-latin-600-normal.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+
+/* --- IBM Plex Mono (code, terminal text, technical content) --- */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('/static/fonts/ibm-plex-mono-latin-400-normal.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('/static/fonts/ibm-plex-mono-latin-500-normal.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+
+/* ============================================================
+ * Token overrides — only the deltas from motif defaults.
+ * ============================================================ */
+
+:root {
+  /* Override motif's font stacks with the Plex family. Fallbacks
+     preserve native-ish rendering if Plex fails to load. */
+  --font-sans:  'IBM Plex Sans',  system-ui, -apple-system, "Segoe UI",
+                Roboto, "Noto Sans CJK TC", sans-serif;
+  --font-serif: 'IBM Plex Serif', Georgia, Charter, Cambria, serif;
+  --font-mono:  'IBM Plex Mono',  ui-monospace, SFMono-Regular,
+                "SF Mono", Menlo, Consolas, monospace;
+
+  /* Brand-specific colors (motif doesn't define these yet). */
+  --color-brand-red: #dc2626;
+
+  /* Plex has a precise, slightly technical feel; tighter radii
+     read more coherent than rounded-everything. */
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* Softer default shadow — more editorial, less Material. */
+  --shadow-md: 0 4px 16px -4px rgb(0 0 0 / 0.08),
+               0 2px 6px -2px rgb(0 0 0 / 0.06);
+}
+
+/* ============================================================
+ * Display-heading touches tuned for Plex Sans Bold.
+ * ============================================================ */
+
+h1, h2 {
+  letter-spacing: -0.015em;
+}
+
+/* ============================================================
+ * Long-form content opt-in — apply .prose on a container to
+ * switch to Plex Serif with reading-grade spacing.
+ * Use on blog posts, journal entries, tutorial body text.
+ * ============================================================ */
+
+.prose {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 40rem;
+}
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
+.prose code, .prose pre {
+  font-family: var(--font-mono);
+}
+.prose p { margin: 0 0 1em; }
+
+/* ============================================================
+ * Small polish — consistent focus ring + selection highlight.
+ * ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--color-primary-100);
+  color: var(--color-primary-900);
+}

@@ -1,62 +1,39 @@
 <!doctype html>
 <!--
-  Render helper — not a user-facing page. Used to rasterize mark-pi
-  at precise sizes via headless Chrome, with Inter loaded from Google
-  Fonts so font metrics match our SVG source regardless of the host
-  system's fonts. Safe to leave in the repo; .nojekyll keeps it from
-  being published with special handling.
+  Render helper — rasterizes the font-locked mark-pi.svg to PNG at a
+  given size via headless Chrome. No font loading needed since the
+  SVG now contains extracted glyph paths, not <text> elements.
 
-  Usage: open ?size=<px>; viewport same size; screenshot.
+  Usage:  open ?size=<px>  — page becomes exactly <size> × <size>
+  Screenshot at viewport = size × size produces a clean PNG.
 -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>pi mark render</title>
-  <!-- No external font load: render uses the same font stack as the
-       live SVG (system-ui / SF Pro on macOS, Segoe UI on Windows),
-       so PNG rasters visually match the SVG as displayed in browsers. -->
-
   <style>
     html, body {
       margin: 0; padding: 0;
       background: transparent;
       overflow: hidden;
     }
-    #frame {
-      background: transparent;
-    }
-    svg { display: block; width: 100%; height: 100%; }
-    /* Defaults; script rewrites with ?size=N */
+    #frame { background: transparent; }
+    img { display: block; width: 100%; height: 100%; }
     #frame { width: 512px; height: 512px; }
   </style>
 </head>
 <body>
   <div id="frame">
-    <svg id="icon" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"
-         role="img" aria-label="Pi — Pointegrity">
-      <style>
-        .mark {
-          font-family: 'Inter', system-ui, sans-serif;
-          font-weight: 800;
-          font-size: 128px;
-          letter-spacing: -0.04em;
-          fill: #1e2f14;
-        }
-      </style>
-      <text x="28" y="120" class="mark">pı</text>
-      <circle cx="117" cy="33" r="13" fill="#dc2626"/>
-    </svg>
+    <img src="mark-pi.svg" alt="">
   </div>
   <script>
-    const p = new URLSearchParams(location.search);
-    const size = parseInt(p.get('size') || '512', 10);
+    const size = parseInt(
+      new URLSearchParams(location.search).get('size') || '512', 10);
     const frame = document.getElementById('frame');
     frame.style.width = size + 'px';
     frame.style.height = size + 'px';
-    // Announce readiness once Inter is actually loaded (not just CSS parsed)
-    document.fonts.ready.then(() => {
-      document.body.setAttribute('data-ready', '1');
-    });
+    // No fonts.ready wait needed — SVG has no text.
+    document.body.setAttribute('data-ready', '1');
   </script>
 </body>
 </html>
