@@ -1,0 +1,62 @@
+<!doctype html>
+<!--
+  Render helper — not a user-facing page. Used to rasterize mark-pi
+  at precise sizes via headless Chrome, with Inter loaded from Google
+  Fonts so font metrics match our SVG source regardless of the host
+  system's fonts. Safe to leave in the repo; .nojekyll keeps it from
+  being published with special handling.
+
+  Usage: open ?size=<px>; viewport same size; screenshot.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>pi mark render</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=block">
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      background: transparent;
+      overflow: hidden;
+    }
+    #frame {
+      display: flex; align-items: center; justify-content: center;
+      background: transparent;
+    }
+    svg { display: block; width: 86%; height: 86%; }
+    /* Defaults; script rewrites with ?size=N */
+    #frame { width: 512px; height: 512px; }
+  </style>
+</head>
+<body>
+  <div id="frame">
+    <svg id="icon" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="Pi — Pointegrity">
+      <style>
+        .mark {
+          font-family: 'Inter', system-ui, sans-serif;
+          font-weight: 800;
+          font-size: 128px;
+          letter-spacing: -0.04em;
+          fill: #1e2f14;
+        }
+      </style>
+      <text x="28" y="120" class="mark">pı</text>
+      <circle cx="117" cy="33" r="13" fill="#dc2626"/>
+    </svg>
+  </div>
+  <script>
+    const p = new URLSearchParams(location.search);
+    const size = parseInt(p.get('size') || '512', 10);
+    const frame = document.getElementById('frame');
+    frame.style.width = size + 'px';
+    frame.style.height = size + 'px';
+    // Announce readiness once Inter is actually loaded (not just CSS parsed)
+    document.fonts.ready.then(() => {
+      document.body.setAttribute('data-ready', '1');
+    });
+  </script>
+</body>
+</html>

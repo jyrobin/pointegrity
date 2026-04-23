@@ -32,14 +32,14 @@
       .product {
         font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
         font-weight: 600;
-        font-size: 72px;
+        font-size: 80px;
         letter-spacing: -0.02em;
         fill: #2d441d;
       }
     ]]></style>
   </defs>
   <text x="20" y="100" class="pi">pı</text>
-  <circle cx="102" cy="45" r="9" fill="#dc2626"/>
-  <text x="155" y="92" class="sep">·</text>
-  <text x="195" y="100" class="product">pouch</text>
+  <circle cx="82" cy="40" r="9" fill="#dc2626"/>
+  <text x="125" y="92" class="sep">·</text>
+  <text x="165" y="100" class="product">pouch</text>
 </svg>

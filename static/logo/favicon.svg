@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Favicon — SVG master. Modern browsers (Chrome, Firefox, Edge,
+  Safari 17+) render this directly in the tab.
+
+  Uses Inter via system font stack. At favicon sizes (16-32px),
+  font-metric differences between Inter and fallback sans fonts are
+  imperceptible. If exact rendering matters in a future context,
+  the PNG rasters alongside this file were generated from a page
+  that loaded real Inter from Google Fonts.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160"
+     role="img" aria-label="π — Pointegrity">
+  <style>
+    .mark {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-weight: 800;
+      font-size: 128px;
+      letter-spacing: -0.04em;
+      fill: #1e2f14;
+    }
+  </style>
+  <text x="28" y="120" class="mark">pı</text>
+  <circle cx="117" cy="33" r="13" fill="#dc2626"/>
+</svg>
