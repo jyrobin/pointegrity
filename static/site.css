@@ -28,12 +28,16 @@ body {
   padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
 }
 .topnav .brand {
-  font-weight: var(--font-semibold);
-  font-size: 1.125rem;
-  color: var(--color-primary-800);
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
-  letter-spacing: -0.01em;
 }
+.topnav .brand img {
+  height: 1.75rem;     /* ~28px */
+  width: auto;
+  display: block;
+}
+.topnav .brand:hover { opacity: 0.85; }
 .topnav .links a {
   margin-left: var(--space-5, 1.25rem);
   color: var(--color-neutral-700);
