@@ -26,7 +26,9 @@
         font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
         font-weight: 700;
         font-size: 88px;
-        letter-spacing: -0.04em;
+        /* No letter-spacing: mark-pi.svg's paths are extracted at natural
+           advances, so the composite must also use natural tracking for
+           the two "pı" renderings to be visually identical. */
         fill: #1e2f14;
       }
       .sep {
@@ -45,7 +47,7 @@
     ]]></style>
   </defs>
   <text x="20" y="100" class="pi">pı</text>
-  <circle cx="86" cy="40" r="9" fill="#dc2626"/>
-  <text x="115" y="92" class="sep">·</text>
-  <text x="140" y="100" class="product">pouch</text>
+  <circle cx="84" cy="40" r="9" fill="#dc2626"/>
+  <text x="108" y="93" class="sep">·</text>
+  <text x="135" y="100" class="product">pouch</text>
 </svg>

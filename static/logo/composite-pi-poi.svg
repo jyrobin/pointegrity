@@ -18,7 +18,7 @@
         font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
         font-weight: 700;
         font-size: 88px;
-        letter-spacing: -0.04em;
+        /* No letter-spacing: matches the locked mark-pi.svg tracking. */
         fill: #1e2f14;
       }
       .sep {
@@ -37,7 +37,7 @@
     ]]></style>
   </defs>
   <text x="20" y="100" class="pi">pı</text>
-  <circle cx="86" cy="40" r="9" fill="#dc2626"/>
-  <text x="115" y="92" class="sep">·</text>
-  <text x="140" y="100" class="product">POI</text>
+  <circle cx="84" cy="40" r="9" fill="#dc2626"/>
+  <text x="108" y="93" class="sep">·</text>
+  <text x="135" y="100" class="product">POI</text>
 </svg>
