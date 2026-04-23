@@ -1,0 +1,240 @@
+/* Pointegrity umbrella-site styles. Builds on motif tokens.
+ * Kept minimal — product sites own their own polish. */
+
+:root {
+  --page-max: 64rem;
+  --hero-max: 46rem;
+}
+
+body {
+  font-family: var(--font-sans, system-ui);
+  color: var(--color-neutral-900);
+  background: var(--color-neutral-50);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.wrap {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--space-4, 1rem);
+}
+
+/* --- Top nav --- */
+.topnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+}
+.topnav .brand {
+  font-weight: var(--font-semibold);
+  font-size: 1.125rem;
+  color: var(--color-primary-800);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.topnav .links a {
+  margin-left: var(--space-5, 1.25rem);
+  color: var(--color-neutral-700);
+  text-decoration: none;
+  font-size: var(--text-sm, 0.9rem);
+}
+.topnav .links a:hover { color: var(--color-primary-700); }
+
+/* --- Hero --- */
+.hero {
+  padding: var(--space-10, 4rem) var(--space-4) var(--space-8, 3rem);
+  text-align: center;
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.1;
+  margin: 0 0 var(--space-4, 1rem);
+  color: var(--color-primary-800, #1e3a1e);
+  letter-spacing: -0.02em;
+}
+.hero p.sub {
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  color: var(--color-neutral-700);
+  max-width: var(--hero-max);
+  margin: 0 auto var(--space-6, 1.5rem);
+}
+.cta-row {
+  display: flex;
+  gap: var(--space-3, 0.75rem);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* --- Sections --- */
+.section {
+  padding: var(--space-8, 3rem) var(--space-4) var(--space-6, 2rem);
+}
+.section-title {
+  font-size: 1.75rem;
+  margin: 0 0 var(--space-5, 1.5rem);
+  color: var(--color-neutral-900);
+  letter-spacing: -0.01em;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--space-5, 1.5rem);
+}
+
+/* --- Product cards --- */
+.product {
+  padding: var(--space-5, 1.5rem);
+  position: relative;
+  transition: box-shadow var(--duration-fast, 150ms);
+}
+.product:hover { box-shadow: var(--shadow-md); }
+.product.muted {
+  background: var(--color-neutral-100);
+  border-style: dashed;
+}
+.product h3 {
+  margin: var(--space-2, 0.5rem) 0 var(--space-1);
+  font-size: 1.25rem;
+  color: var(--color-primary-700);
+}
+.product-tag {
+  margin: 0 0 var(--space-3, 0.75rem);
+  color: var(--color-neutral-600);
+  font-size: var(--text-sm, 0.9rem);
+  font-style: italic;
+}
+.product p {
+  margin: 0 0 var(--space-3, 0.75rem);
+  color: var(--color-neutral-700);
+  font-size: var(--text-sm, 0.95rem);
+}
+.product-meta {
+  font-size: var(--text-xs, 0.8rem);
+  color: var(--color-neutral-500);
+  margin: var(--space-3) 0 var(--space-4);
+}
+.product-actions {
+  display: flex;
+  gap: var(--space-2, 0.5rem);
+  flex-wrap: wrap;
+}
+
+/* Status pill in top-right of each product card */
+.product-status {
+  position: absolute;
+  top: var(--space-3, 0.75rem);
+  right: var(--space-3, 0.75rem);
+  font-size: var(--text-xs, 0.7rem);
+  padding: 0.15rem 0.6rem;
+  border-radius: var(--radius-pill, 999px);
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.product-status.available {
+  background: var(--color-success-100, #dcfce7);
+  color: var(--color-success-800, #166534);
+}
+.product-status.beta {
+  background: #fef3c7;
+  color: #92400e;
+}
+.product-status.soon {
+  background: var(--color-neutral-200, #e5e5e5);
+  color: var(--color-neutral-700, #525252);
+}
+
+/* --- Tenets (philosophy) --- */
+.tenet {
+  padding: var(--space-4);
+}
+.tenet h3 {
+  margin: 0 0 var(--space-2);
+  font-size: 1.05rem;
+  color: var(--color-primary-700);
+}
+.tenet p {
+  margin: 0;
+  color: var(--color-neutral-700);
+  font-size: var(--text-sm, 0.95rem);
+}
+
+/* --- About page --- */
+.about {
+  padding: var(--space-8, 3rem) var(--space-4);
+  max-width: 42rem;
+}
+.about h1 {
+  font-size: 2rem;
+  color: var(--color-primary-800);
+  margin: 0 0 var(--space-4);
+  letter-spacing: -0.02em;
+}
+.about h2 {
+  font-size: 1.2rem;
+  color: var(--color-primary-700);
+  margin: var(--space-6) 0 var(--space-2);
+}
+.about p {
+  color: var(--color-neutral-800);
+  margin: 0 0 var(--space-3);
+  line-height: 1.65;
+}
+.about p.lead {
+  font-size: 1.1rem;
+  color: var(--color-neutral-700);
+}
+.about a { color: var(--color-primary-700); }
+.about a:hover { text-decoration: underline; }
+
+/* --- Footer --- */
+footer {
+  padding: var(--space-8, 3rem) var(--space-4) var(--space-5);
+  border-top: 1px solid var(--color-neutral-200);
+  margin-top: var(--space-8, 3rem);
+  color: var(--color-neutral-500);
+  font-size: var(--text-sm, 0.9rem);
+}
+.foot-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-6, 1.5rem);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+.foot-brand {
+  font-weight: var(--font-semibold);
+  color: var(--color-primary-800);
+  margin: 0;
+}
+.foot-tag {
+  margin: var(--space-1, 0.25rem) 0 0;
+  color: var(--color-neutral-500);
+}
+.foot-links {
+  display: flex;
+  gap: var(--space-4, 1rem);
+  flex-wrap: wrap;
+}
+.foot-links a {
+  color: var(--color-neutral-700);
+  text-decoration: none;
+}
+.foot-links a:hover { color: var(--color-primary-700); }
+.foot-copy {
+  margin: 0;
+  text-align: center;
+  color: var(--color-neutral-500);
+  font-size: var(--text-xs, 0.8rem);
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  .topnav { flex-direction: column; gap: var(--space-2, 0.5rem); padding: var(--space-3) var(--space-4); }
+  .topnav .links a { margin-left: 0; margin-right: var(--space-3); }
+  .hero { padding-top: var(--space-6); }
+  .foot-row { flex-direction: column; }
+}

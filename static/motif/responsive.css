@@ -1,0 +1,95 @@
+/* motif/responsive.css — Responsive grid, breakpoint utilities, mobile-first helpers */
+
+/* --- Grid system (mobile-first: single column) --- */
+.grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* --- Table responsive --- */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* --- sm: 640px --- */
+@media (min-width: 640px) {
+  .sm\:hidden { display: none; }
+  .sm\:block { display: block; }
+  .sm\:flex { display: flex; }
+  .sm\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- md: 768px --- */
+@media (min-width: 768px) {
+  .md\:hidden { display: none; }
+  .md\:block { display: block; }
+  .md\:inline { display: inline; }
+  .md\:flex { display: flex; }
+  .md\:flex-row { flex-direction: row; }
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .md\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .md\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .md\:gap-6 { gap: var(--space-6); }
+
+  .md\:p-6 { padding: var(--space-6); }
+  .md\:p-8 { padding: var(--space-8); }
+  .md\:px-6 { padding-left: var(--space-6); padding-right: var(--space-6); }
+
+  .md\:text-lg { font-size: var(--text-lg); }
+  .md\:text-xl { font-size: var(--text-xl); }
+
+  .container {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+/* --- lg: 1024px --- */
+@media (min-width: 1024px) {
+  .lg\:hidden { display: none; }
+  .lg\:block { display: block; }
+  .lg\:flex { display: flex; }
+  .lg\:flex-row { flex-direction: row; }
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .lg\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .lg\:gap-8 { gap: var(--space-8); }
+
+  .lg\:p-10 { padding: var(--space-10); }
+  .lg\:px-8 { padding-left: var(--space-8); padding-right: var(--space-8); }
+
+  .lg\:text-2xl { font-size: var(--text-2xl); }
+
+  .container {
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+}
+
+/* --- Mobile navbar (collapse is in components.css) --- */
+@media (max-width: 767px) {
+  .navbar {
+    padding: 0 var(--space-3);
+    gap: var(--space-2);
+  }
+}
+
+/* --- Sidebar collapse --- */
+@media (max-width: 768px) {
+  .app-sidebar { display: none; }
+  .app-main { padding: var(--space-4); }
+}
+
+/* --- xl: 1280px --- */
+@media (min-width: 1280px) {
+  .xl\:hidden { display: none; }
+  .xl\:block { display: block; }
+  .xl\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+}
