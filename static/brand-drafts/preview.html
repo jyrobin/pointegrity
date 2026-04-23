@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brand preview — Pointegrity</title>
+
+  <!-- Base: motif tokens + components come first. -->
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+
+  <!-- Brand: pick one via ?brand=system|inter|plex in the URL. -->
+  <script>
+    const params = new URLSearchParams(location.search);
+    const brand = ['system', 'inter', 'plex'].includes(params.get('brand'))
+      ? params.get('brand')
+      : 'system';
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = brand + '.css';
+    document.head.appendChild(link);
+    // Make the active tab visible after DOM ready
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.tab').forEach(a => {
+        if (a.dataset.brand === brand) a.classList.add('active');
+      });
+      document.title = `Brand preview — ${brand} — Pointegrity`;
+      document.getElementById('current-brand').textContent = brand;
+    });
+  </script>
+
+  <style>
+    body {
+      font-family: var(--font-sans, system-ui);
+      color: var(--color-neutral-900);
+      background: var(--color-neutral-50);
+      margin: 0;
+      line-height: 1.55;
+    }
+    .wrap { max-width: 52rem; margin: 0 auto; padding: 2rem 1rem; }
+
+    /* Tab nav — lets you flip between brand options quickly */
+    .tabs {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+      padding: 0.75rem;
+      background: var(--color-card-bg, #fff);
+      border: 1px solid var(--color-border, #e5e5e5);
+      border-radius: var(--radius-md, 0.5rem);
+      align-items: center;
+    }
+    .tabs .label {
+      font-size: var(--text-sm, 0.85rem);
+      color: var(--color-neutral-600);
+      font-family: var(--font-mono);
+      margin-right: 0.5rem;
+    }
+    .tab {
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-pill, 999px);
+      background: var(--color-neutral-100);
+      color: var(--color-neutral-700);
+      text-decoration: none;
+      font-size: var(--text-sm, 0.875rem);
+    }
+    .tab.active {
+      background: var(--color-primary-100);
+      color: var(--color-primary-800);
+      font-weight: 500;
+    }
+    .tab:hover { background: var(--color-neutral-200); }
+    .tab.active:hover { background: var(--color-primary-200); }
+    .brand-note {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs, 0.75rem);
+      color: var(--color-neutral-500);
+    }
+
+    /* Sample sections */
+    section {
+      background: var(--color-card-bg, #fff);
+      border: 1px solid var(--color-border, #e5e5e5);
+      border-radius: var(--radius-lg, 0.75rem);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    section > h2.section-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin: 0 0 1rem;
+      font-weight: 500;
+    }
+
+    /* Display heading (hero-style) */
+    .display {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.1;
+      margin: 0 0 0.75rem;
+      color: var(--color-primary-800);
+    }
+    .display-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--color-neutral-700);
+      margin: 0;
+    }
+
+    /* App UI sample */
+    .ui-nav {
+      display: flex; gap: 1rem; align-items: center;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 1rem;
+    }
+    .ui-brand {
+      font-weight: 700;
+      color: var(--color-primary-800);
+    }
+    .ui-item {
+      color: var(--color-neutral-700);
+      font-size: var(--text-sm, 0.9rem);
+      text-decoration: none;
+    }
+    .ui-item.active { color: var(--color-primary-700); }
+
+    .btn-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+    .btn {
+      display: inline-flex; align-items: center;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      font-weight: 500;
+      text-decoration: none;
+      font-size: var(--text-sm);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: var(--color-primary-600);
+      color: #fff;
+      border-color: var(--color-primary-600);
+    }
+    .btn-outline {
+      background: var(--color-card-bg);
+      color: var(--color-primary-700);
+      border-color: var(--color-primary-300);
+    }
+
+    /* Long-form / content sample */
+    .content-sample {
+      max-width: 38rem;
+    }
+    .content-sample p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--color-neutral-800);
+    }
+    /* Plex brand has a .prose class that switches to serif — show both
+       plain and serif versions for comparison */
+    .content-sample.as-serif {
+      font-family: var(--font-serif);
+    }
+
+    /* Code sample */
+    .code-sample {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      background: var(--color-neutral-100);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+    }
+    .code-sample .kw { color: #b45309; }
+    .code-sample .str { color: #166534; }
+    .code-sample .com { color: var(--color-neutral-500); }
+
+    /* Inline tokens displayed */
+    dl.tokens {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.35rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      margin: 0;
+    }
+    dl.tokens dt { color: var(--color-primary-700); }
+    dl.tokens dd { margin: 0; color: var(--color-neutral-700); word-break: break-word; }
+
+    ul.features {
+      padding-left: 1.25rem;
+      margin: 0;
+    }
+    ul.features li { margin: 0.35rem 0; }
+
+    /* Dot mark reused from site.css idea */
+    .dot-red { color: var(--color-brand-red, #dc2626); }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="tabs">
+    <span class="label">?brand =</span>
+    <a class="tab" data-brand="system" href="?brand=system">system</a>
+    <a class="tab" data-brand="inter"  href="?brand=inter">inter</a>
+    <a class="tab" data-brand="plex"   href="?brand=plex">plex</a>
+    <span class="brand-note">showing: <span id="current-brand">…</span></span>
+  </div>
+
+  <!-- DISPLAY / HERO -->
+  <section>
+    <h2 class="section-label">Display — marketing hero</h2>
+    <h1 class="display">Software that respects<br>the person using it.</h1>
+    <p class="display-sub">
+      Pointegrity builds privacy-first personal data tools
+      for individuals. Ephemeral by default, durable by opt-in.
+    </p>
+  </section>
+
+  <!-- APP UI -->
+  <section>
+    <h2 class="section-label">App UI — nav + buttons + labels</h2>
+    <div class="ui-nav">
+      <span class="ui-brand">pouch</span>
+      <a class="ui-item active">Inbox</a>
+      <a class="ui-item">Kept</a>
+      <a class="ui-item">Archive</a>
+    </div>
+    <p style="margin: 0 0 0.25rem; color: var(--color-neutral-600); font-size: 0.875rem;">
+      7 drops · 3 expiring soon · synced 2 min ago
+    </p>
+    <div class="btn-row">
+      <a class="btn btn-primary">+ New drop</a>
+      <a class="btn btn-outline">Import</a>
+      <a class="btn btn-outline">Settings</a>
+    </div>
+  </section>
+
+  <!-- LONG-FORM CONTENT -->
+  <section>
+    <h2 class="section-label">Long-form content — Terms / About / Journal</h2>
+    <div class="content-sample">
+      <h3 style="margin-top:0; color: var(--color-primary-700);">What pouch is</h3>
+      <p>
+        Pouch is a personal data relay. You capture something on one
+        device; it's available on another. When you're done with it,
+        it's gone. When you want it to last, it lasts — on your
+        infrastructure, not ours.
+      </p>
+      <p>
+        Most of what people capture is in-flight, not at rest. The
+        small portion that matters long-term deserves explicit,
+        opt-in durability. That's the model. The rest is polish.
+      </p>
+      <p style="color: var(--color-neutral-600); font-size: 0.875rem; font-style: italic;">
+        (For the <code>plex</code> brand option, apply class <code>prose</code> on this block to see the serif variant tuned for long reading.)
+      </p>
+    </div>
+  </section>
+
+  <!-- CODE SAMPLE — matters most for grove/stonecampus -->
+  <section>
+    <h2 class="section-label">Code — tutorials, docs, dev content</h2>
+    <p style="color: var(--color-neutral-700); margin: 0 0 1rem;">
+      Monospace sample with syntax-ish coloring. How well it reads next
+      to the body font is what distinguishes a "hybrid content + app"
+      type system from a UI-only one.
+    </p>
+    <pre class="code-sample"><span class="com">// Move a drop from inbox to kept</span>
+<span class="kw">async function</span> promote(drop) {
+  <span class="kw">const</span> res = <span class="kw">await</span> api.patch(<span class="str">`/api/items/${drop.id}`</span>, {
+    stream: <span class="str">'kept'</span>,
+  });
+  <span class="kw">if</span> (res.ok) toast(<span class="str">'moved to kept'</span>);
+}</pre>
+    <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-neutral-700); margin: 1rem 0 0;">
+      Inline mono (<code style="background: var(--color-neutral-100); padding: 0.1em 0.3em; border-radius: 3px;">--font-mono</code>) with a variable reference.
+    </p>
+  </section>
+
+  <!-- Tokens in this brand -->
+  <section>
+    <h2 class="section-label">Tokens this brand sets</h2>
+    <dl class="tokens">
+      <dt>--font-sans</dt>    <dd id="dump-sans"></dd>
+      <dt>--font-serif</dt>   <dd id="dump-serif"></dd>
+      <dt>--font-mono</dt>    <dd id="dump-mono"></dd>
+      <dt>--radius-md</dt>    <dd id="dump-rmd"></dd>
+      <dt>--radius-lg</dt>    <dd id="dump-rlg"></dd>
+      <dt>--color-brand-red</dt> <dd id="dump-red"></dd>
+    </dl>
+    <script>
+      window.addEventListener('load', () => {
+        const cs = getComputedStyle(document.documentElement);
+        const set = (id, name) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = cs.getPropertyValue(name).trim() || '(inherited from motif)';
+        };
+        set('dump-sans', '--font-sans');
+        set('dump-serif', '--font-serif');
+        set('dump-mono', '--font-mono');
+        set('dump-rmd', '--radius-md');
+        set('dump-rlg', '--radius-lg');
+        set('dump-red', '--color-brand-red');
+      });
+    </script>
+  </section>
+
+</div>
+</body>
+</html>

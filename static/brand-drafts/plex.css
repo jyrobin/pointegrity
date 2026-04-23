@@ -1,0 +1,63 @@
+/* pointegrity-brand — IBM Plex family option.
+ *
+ * Plex ships as a coordinated trio: Sans for UI + short text, Serif
+ * for long-form editorial / learning content, Mono for code. They're
+ * designed together, so mixing them on one page doesn't clash — which
+ * matters for apps that blend UI chrome + reading + code on the same
+ * surface (i.e. grove / stonecampus, and arguably pouch when a drop
+ * expands into a long markdown body).
+ *
+ * Design vibe: precise, slightly technical, warmer than Inter. IBM
+ * built Plex for exactly the "we need one type system across many
+ * product types" problem.
+ *
+ * Production: self-host the woff2 files. */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600&display=swap');
+
+:root {
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, "Segoe UI",
+               "Noto Sans CJK TC", sans-serif;
+  --font-serif: 'IBM Plex Serif', Georgia, Charter, Cambria, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, "SF Mono",
+               Menlo, Consolas, monospace;
+
+  --color-brand-red: #dc2626;
+
+  /* Plex feels precise; keep radii a touch tighter than Inter draft. */
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  --shadow-md: 0 4px 16px -4px rgb(0 0 0 / 0.08),
+               0 2px 6px -2px rgb(0 0 0 / 0.06);
+}
+
+/* Plex Sans is a touch wider than Inter; let the tracking relax a bit
+   for display headings so they don't feel crowded. */
+h1, h2 {
+  letter-spacing: -0.015em;
+}
+
+/* Opt-in: long-form content can override to the serif. */
+.prose {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 40rem;
+}
+.prose h1, .prose h2, .prose h3 {
+  font-family: var(--font-sans);
+}
+.prose code, .prose pre {
+  font-family: var(--font-mono);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--color-primary-100);
+  color: var(--color-primary-900);
+}
