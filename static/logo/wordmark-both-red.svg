@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Pointegrity wordmark — red dots on BOTH i's.
+  Most expressive variant; the two red accents read instantly and
+  the symmetry reinforces the point+integrity concept.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 140"
+     role="img" aria-label="Pointegrity">
+  <defs>
+    <style><![CDATA[
+      .word {
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
+        font-weight: 700;
+        font-size: 88px;
+        letter-spacing: -0.02em;
+        fill: #1e2f14;
+      }
+    ]]></style>
+  </defs>
+  <text x="20" y="100" class="word">Poıntegrıty</text>
+  <circle cx="143" cy="35" r="9" fill="#dc2626"/>
+  <circle cx="408" cy="35" r="9" fill="#dc2626"/>
+</svg>

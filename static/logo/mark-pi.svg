@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Pi monogram — standalone mark.
+  "Pi" = Pointegrity initials. Use as favicon, avatar, app icon, or
+  anywhere a square-ish mark is needed. Lowercase for a quieter,
+  more developer-friendly voice; the accent dot on the 'i' ties it
+  to the wordmark family.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160"
+     role="img" aria-label="Pi — Pointegrity">
+  <defs>
+    <style><![CDATA[
+      .mark {
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
+        font-weight: 800;
+        font-size: 128px;
+        letter-spacing: -0.04em;
+        fill: #1e2f14;
+      }
+    ]]></style>
+  </defs>
+  <text x="28" y="120" class="mark">pı</text>
+  <circle cx="110" cy="37" r="13" fill="#dc2626"/>
+</svg>

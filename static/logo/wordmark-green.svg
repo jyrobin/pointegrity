@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Pointegrity wordmark — single green accent dot on the first 'i'.
+  Canonical/primary. Matches the motif primary-800 token used across
+  the site. Tune circle cx ± a few px in Figma if the dot drifts
+  visually.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 140"
+     role="img" aria-label="Pointegrity">
+  <defs>
+    <style><![CDATA[
+      .word {
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
+        font-weight: 700;
+        font-size: 88px;
+        letter-spacing: -0.02em;
+        fill: #1e2f14;
+      }
+    ]]></style>
+  </defs>
+  <text x="20" y="100" class="word">Poıntegrity</text>
+  <circle cx="143" cy="35" r="9" fill="#7BA35A"/>
+</svg>
