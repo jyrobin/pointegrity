@@ -42,16 +42,23 @@ body {
 }
 .topnav .links a:hover { color: var(--color-primary-700); }
 
-/* --- Hero --- */
+/* --- Hero ---
+ * Motif ships a .hero component with a solid-green rounded banner
+ * style. That conflicts with the airy "part of the page" look we
+ * want here, so we reset those properties explicitly. If we ever
+ * want the banner treatment back, switch by removing this block. */
 .hero {
+  background: transparent;
+  border-radius: 0;
   padding: var(--space-10, 4rem) var(--space-4) var(--space-8, 3rem);
   text-align: center;
+  color: var(--color-neutral-900);
 }
 .hero h1 {
   font-size: clamp(2rem, 5vw, 3.25rem);
   line-height: 1.1;
   margin: 0 0 var(--space-4, 1rem);
-  color: var(--color-primary-800, #1e3a1e);
+  color: var(--color-primary-800, #2d441d);
   letter-spacing: -0.02em;
 }
 .hero p.sub {
