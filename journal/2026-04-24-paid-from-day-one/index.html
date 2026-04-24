@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paid from day one: why pouch skipped the free tier — Pointegrity Journal</title>
+  <meta name="description" content="The 'free tier then upsell' playbook is the indie-SaaS default. Pouch chose the opposite. Here's the reasoning, and what it costs us.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+    .kicker {
+      font-family: var(--font-mono); font-size: 0.7rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--color-neutral-500); margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 500;
+      color: var(--color-primary-800); letter-spacing: -0.015em;
+      line-height: 1.2; margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      font-family: var(--font-mono); font-size: 0.8rem;
+      color: var(--color-neutral-500); margin-bottom: 2.5rem;
+    }
+    .post-meta a { color: inherit; text-decoration: underline; }
+    .post-body { max-width: none; }
+    .post-body h2 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.5rem; color: var(--color-primary-700); }
+    .post-body h3 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: 0.35rem; color: var(--color-neutral-800); }
+    .post-body blockquote {
+      border-left: 3px solid var(--color-primary-300);
+      padding: 0 1rem; margin: 1.25rem 0; color: var(--color-neutral-700);
+    }
+    .post-body ul { padding-left: 1.25rem; margin: 0.75rem 0 1rem; }
+    .post-body li { margin: 0.35rem 0; }
+    .post-body code {
+      background: var(--color-neutral-100); padding: 0.1em 0.3em;
+      border-radius: 3px; font-size: 0.9em;
+    }
+    .post-body a { color: var(--color-primary-700); }
+    .post-body a:hover { text-decoration: underline; }
+
+    .back-link {
+      display: inline-block; margin-top: 3rem;
+      color: var(--color-primary-700); text-decoration: none; font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">Paid from day one: why pouch skipped the free tier</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-04-24">2026-04-24</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      The indie-SaaS default playbook is <em>free tier, then upsell</em>.
+      Ship a generous free version, capture users with low friction,
+      convert a small percentage to paid, accept that the free users
+      are effectively marketing cost. It works. It has built several
+      large companies.
+    </p>
+
+    <p>
+      We chose the opposite. Pouch is <strong>paid from day one,
+      no free tier, 14-day trial with no credit card required</strong>.
+      This post explains the reasoning and the real cost of that
+      decision.
+    </p>
+
+    <h2>Three reasons, in order of importance</h2>
+
+    <h3>1. Incentive alignment</h3>
+
+    <p>
+      When users pay us directly, we work for them. When a free tier
+      dominates and paid users subsidize them, we work for the <em>paid
+      users</em> first and tolerate the free users. When neither group
+      pays and advertising or analytics does, we work for the
+      advertiser.
+    </p>
+
+    <p>
+      Pouch handles personal data. The whole value proposition is
+      "we won't read your drops, we won't mine them, we won't sell
+      signals about them." That promise is only credible if the
+      money to keep the lights on comes from the people whose data
+      we're holding. Any other funding source creates a conflict of
+      interest that we'd eventually, however slowly, lean into.
+    </p>
+
+    <p>
+      The cleanest way to make this promise load-bearing is to never
+      have the alternative on the table.
+    </p>
+
+    <h3>2. Signal quality</h3>
+
+    <p>
+      A free tier produces a signal that's dominated by people who
+      want something free, not people who want the specific thing
+      you built. For general consumer products — where "free user
+      today" and "paying customer someday" correlate — that's fine.
+      For a tool with a specific positioning ("personal data relay,
+      ephemeral by default, durable by opt-in"), it's mostly noise.
+    </p>
+
+    <p>
+      A paid trial starts with a smaller number, but each user in
+      that number actually wants <em>this product</em>, not a
+      generic capture tool. Their feedback is load-bearing in a way
+      that free-tier feedback often isn't. This matters especially
+      early, when the product is still finding its shape and we
+      need conviction about what to build next.
+    </p>
+
+    <h3>3. Infrastructure math</h3>
+
+    <p>
+      Free tiers are often defended with variable-cost arithmetic —
+      storage is cheap, compute is cheap, only the conversions
+      matter. The numbers usually work in aggregate. But they also
+      absorb a particular class of user: someone who signs up, uses
+      the product lightly, costs us a small amount in perpetuity,
+      and never converts. Multiply by the expected conversion rate
+      (~2-5% for most SaaS) and the 95-98% who don't convert are
+      the bulk of our infra bill.
+    </p>
+
+    <p>
+      At our scale today (solo founder, pre-launch), each non-paying
+      user is not free to serve. Ephemeral drops hit our database,
+      the SPA fetches them, the CDN caches assets. It adds up. A
+      paid trial caps this at the trial window (14 days), after
+      which the account enters a read-only grace period and then
+      lapses. No forever-free tail.
+    </p>
+
+    <h2>What this explicitly closes off</h2>
+
+    <p>
+      Some things we're deliberately forgoing:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Viral free-tier growth.</strong> Products like Notion
+        and Figma grew through users inviting colleagues to free
+        accounts. That loop doesn't start here. Growth will be
+        slower, from people who decide pouch is worth $8 per month.
+      </li>
+      <li>
+        <strong>"Try before you buy" beyond the trial window.</strong>
+        After 14 days you either subscribe or your writes get
+        blocked. No perpetual read-only mode as a funnel.
+      </li>
+      <li>
+        <strong>Freemium feature gating.</strong> Every feature is
+        available to every paying user. We're not holding back
+        vault encryption, delivery via pickup code, or large-file
+        attachments as "Pro" upsell levers. One price, one set of
+        features, expanding over time without tier stratification.
+      </li>
+    </ul>
+
+    <p>
+      These are real costs. We know we're giving up a growth lever
+      that other indie SaaS products have used successfully. We
+      think the alignment benefit is worth it, but we want to be
+      honest that the trade has a real downside.
+    </p>
+
+    <h2>Why the 14-day trial, though</h2>
+
+    <p>
+      A pure "$8 to even see it" model would block adoption
+      entirely. The trial is the compromise: 14 days of full access,
+      no card required to start, clear visible countdown in the UI.
+      Long enough to see whether pouch fits your workflow, short
+      enough that we don't accumulate a pile of forever-trialing
+      users.
+    </p>
+
+    <p>
+      We picked 14 specifically because:
+    </p>
+
+    <ul>
+      <li>
+        <strong>7 is too short.</strong> For a tool you reach for
+        only when a specific need arises, a week may not contain
+        enough triggers to realize pouch is useful. You try it on
+        Monday, forget, and see the trial expire before the
+        problem recurs.
+      </li>
+      <li>
+        <strong>30 is too long.</strong> Beyond ~14 days, users
+        either forget they're on a trial (and get surprised at
+        lapse) or treat it as permanent (and resent the
+        conversion). The "active but not permanent" feeling fades.
+      </li>
+      <li>
+        <strong>14 days is about two work-week cycles.</strong>
+        Enough to contain two or three "oh, I could use pouch for
+        this" moments. Short enough to still feel active and
+        present.
+      </li>
+    </ul>
+
+    <h2>What we do during the trial</h2>
+
+    <p>
+      Once the 14 days are over and a user hasn't subscribed, the
+      account enters a <strong>read-only grace period</strong>:
+      existing drops remain accessible and exportable for 30 days,
+      but no new writes. This is explicit in the UI — a banner under
+      the nav says "trial ended, read-only for N days" with an
+      "Export your data" link that always works.
+    </p>
+
+    <p>
+      We don't delete data at the edge of the grace window without
+      two email reminders. Losing a user's drops because they missed
+      a notification is not a design we can defend.
+    </p>
+
+    <h2>The one case where this breaks</h2>
+
+    <p>
+      If pouch's addressable market turns out to be dominated by
+      users who would only adopt a free tool, we've miscalibrated
+      and we'll know within 6-12 months. The fallback is to add a
+      "Pouch Basic" tier with meaningful limits (say 100 drops,
+      no attachments, 30-day TTL only) that's free forever. Not a
+      time-gated trial; a genuinely different product at the
+      capability level.
+    </p>
+
+    <p>
+      We don't expect to need this, but we're not religious about
+      never adding it. The point is: start with the posture that
+      keeps incentives aligned, and only relax it if evidence forces
+      us to. Not the other way around.
+    </p>
+
+    <h2>The one-line summary</h2>
+
+    <blockquote>
+      A tool that holds your personal data should be funded by you,
+      not by monetizing you. Free tiers would make that promise
+      soft. We skipped them.
+    </blockquote>
+
+    <p>
+      If this resonates, try the
+      <a href="https://pouch.pointegrity.com/pricing">14-day trial</a>
+      when it opens. If it doesn't, we've probably chosen the wrong
+      market positioning and we'd want to hear from you anyway.
+    </p>
+
+  </div>
+
+  <a href="/journal" class="back-link">← All posts</a>
+
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="https://pouch.pointegrity.com">Pouch</a>
+      <a href="/legal/terms">Terms</a>
+      <a href="/legal/privacy">Privacy</a>
+      <a href="mailto:hello@pointegrity.com">hello@pointegrity.com</a>
+    </div>
+  </div>
+  <p class="foot-copy">&copy; 2026 Pointegrity. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
