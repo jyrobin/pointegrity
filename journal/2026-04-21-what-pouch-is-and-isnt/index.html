@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why pouch: what it is, what it deliberately isn't — Pointegrity Journal</title>
+  <meta name="description" content="Pouch kept getting pulled toward 'note app' or 'dropbox' framings. Both were wrong. Here's what we chose and why.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-neutral-500);
+      margin-bottom: 2.5rem;
+    }
+    .post-meta a { color: inherit; text-decoration: underline; }
+
+    /* Body — brand.css already defines .prose (Plex Serif, 1.7 leading).
+       Override max-width here so it matches the post-wrap. */
+    .post-body { max-width: none; }
+    .post-body h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-700);
+    }
+    .post-body h3 {
+      font-size: 1.05rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.35rem;
+      color: var(--color-neutral-800);
+    }
+    .post-body blockquote {
+      border-left: 3px solid var(--color-primary-300);
+      padding: 0 1rem;
+      margin: 1.25rem 0;
+      color: var(--color-neutral-700);
+    }
+    .post-body ul { padding-left: 1.25rem; margin: 0.75rem 0 1rem; }
+    .post-body li { margin: 0.35rem 0; }
+    .post-body code {
+      background: var(--color-neutral-100);
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .post-body a { color: var(--color-primary-700); }
+    .post-body a:hover { text-decoration: underline; }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      color: var(--color-primary-700);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">Why pouch: what it is, what it deliberately isn't</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-04-21">2026-04-21</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      Every product needs a one-liner, and the failed attempts are
+      often more informative than the one that sticks. Pouch kept
+      getting pulled toward three defaults — "note app," "cloud drive,"
+      "email for myself" — and each of them was the wrong shape for
+      what we actually wanted to build. The exercise of naming what
+      pouch <em>isn't</em> produced the sharpest version of what it is.
+    </p>
+
+    <h2>The recurring frustration that started it</h2>
+
+    <p>
+      I need <em>this file</em> on <em>that machine</em>, in the next
+      five minutes, and every option is bad. Email it to myself; the
+      attachment hasn't arrived yet and I look like an idiot in front
+      of a meeting-room projector. Drop it in Google Drive; log in on
+      the demo machine; fight the 2FA prompt; still can't find the
+      right folder. AirDrop; only works if both are Apple, both on the
+      same LAN, both signed in to the same iCloud. USB stick; I own
+      three and none is in the bag today.
+    </p>
+
+    <p>
+      None of these are notes. None are files I want to organize into
+      a tree. They're <em>things in transit</em>. Ephemeral, short-lived,
+      between-places. The tools I reach for are optimized for storage
+      or collaboration — the wrong optimization for what I'm doing.
+    </p>
+
+    <h2>Three framings that were wrong</h2>
+
+    <h3>Not a note-taking app</h3>
+
+    <p>
+      Notes apps optimize for <em>forever-storage</em> and rich editing.
+      Outlines, backlinks, collaborative cursors, long-form capture.
+      Great for a second brain; wrong for "I need this in five minutes
+      on the demo machine." Notes apps also implicitly suggest you
+      should keep everything, which is the opposite of the behavior we
+      wanted to encourage.
+    </p>
+
+    <h3>Not a cloud drive</h3>
+
+    <p>
+      Drive products optimize for <em>mirroring folder trees</em>
+      across devices. You organize into hierarchies, sync, share
+      folders with teammates. Also great for its job; also wrong for
+      ours. A drop in pouch is not a file in a folder. It's a thing
+      with a lifespan — possibly very short — that should be reachable
+      by any client you have, then gone.
+    </p>
+
+    <h3>Not email-for-myself</h3>
+
+    <p>
+      The "mail a copy to yourself" pattern has a lot of what we want:
+      any-device retrieval, low ceremony, forgettable. But email is
+      threads and attachments and contacts and filters and rules — and
+      somebody else's infrastructure deciding what's spam. We wanted
+      the retrieval pattern without the conversational overhead.
+    </p>
+
+    <h2>What we chose: personal data relay</h2>
+
+    <p>
+      "Relay" is load-bearing. A relay connects two points. It doesn't
+      optimize for keeping things; it optimizes for <em>moving things
+      through</em>. Most of what a relay handles passes quickly; a small
+      fraction gets pinned and kept. The pinning is explicit.
+    </p>
+
+    <p>
+      That gave us the one-liner:
+    </p>
+
+    <blockquote>
+      Pouch is a personal data relay. Ephemeral by default, durable
+      by opt-in, yours to own.
+    </blockquote>
+
+    <p>
+      Each phrase earns its place. <em>Ephemeral by default</em>:
+      drops have a TTL you set, and most expire quietly. The default
+      is not "keep." <em>Durable by opt-in</em>: the small things that
+      deserve to last move explicitly into the "kept" stream — a
+      deliberate act, not passive drift. <em>Yours to own</em>:
+      self-hostable (eventually), exportable always, with encryption
+      options for the most sensitive material. You know where your
+      bytes live and you can take them with you.
+    </p>
+
+    <h2>What cascaded from this framing</h2>
+
+    <p>
+      Framing decisions compound. Once we said "relay, not note app,"
+      several product decisions became obvious:
+    </p>
+
+    <ul>
+      <li>
+        <strong>TTL is a first-class field on every drop.</strong>
+        Not a hidden flag. You see the expiry on the card.
+      </li>
+      <li>
+        <strong>Streams are policy lanes, not folders.</strong>
+        "Inbox" is the ephemeral default; "kept" is durable. More on
+        this in <a href="/journal/2026-04-22-streams-not-folders/">the
+        next post</a>.
+      </li>
+      <li>
+        <strong>Delivery is equally important as capture.</strong>
+        A relay needs both ends. We spent significant design time on
+        the "how does the drop get onto the target machine" problem,
+        with a multi-tier trust model (intra-pouch push, short URLs,
+        QR codes, pickup codes, LAN peers).
+      </li>
+      <li>
+        <strong>Paid from day one, no free tier.</strong> Tools that
+        handle your personal data should be funded by you, not by
+        monetizing it.
+      </li>
+    </ul>
+
+    <h2>Why this frame and not another</h2>
+
+    <p>
+      The test for a positioning is whether it <em>forecloses</em>
+      things. "Personal data relay" forecloses conversation threads,
+      social features, a public content layer, AI-summarization-first
+      workflows, and dozens of adjacent product directions that
+      sounded interesting but aren't this. That foreclosure is not a
+      bug; it's the whole point. Every feature we don't build is one
+      we don't have to maintain, defend, or migrate away from later.
+    </p>
+
+    <p>
+      The positioning also gives us something to say "no" against.
+      When someone proposes — very reasonably — that pouch should do
+      X, the answer is "not if X makes us into a different category."
+      This has saved us twice already, and the product is still in
+      pre-launch.
+    </p>
+
+    <h2>Open questions we're holding</h2>
+
+    <p>
+      Some things we haven't fully decided:
+    </p>
+
+    <ul>
+      <li>
+        Where the <em>vault</em> (client-side encrypted, zero-knowledge
+        storage) slots in. Core promise or opt-in tier? Tied to streams
+        or orthogonal?
+      </li>
+      <li>
+        How "smart" enrichment (LLM-driven auto-tagging, summarization)
+        integrates without drifting into note-app shape.
+      </li>
+      <li>
+        Whether the connector ecosystem should be monorepo-owned or
+        open to third parties earlier. Current posture: monorepo
+        through Phase 2, open in Phase 3.
+      </li>
+    </ul>
+
+    <p>
+      We'll write each of these up as the answer clarifies.
+    </p>
+
+    <p>
+      Next post: <a href="/journal/2026-04-22-streams-not-folders/">Streams,
+      not folders — why pouch chose policy lanes over hierarchy.</a>
+    </p>
+
+  </div>
+
+  <a href="/journal" class="back-link">← All posts</a>
+
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="https://pouch.pointegrity.com">Pouch</a>
+      <a href="/legal/terms">Terms</a>
+      <a href="/legal/privacy">Privacy</a>
+      <a href="mailto:hello@pointegrity.com">hello@pointegrity.com</a>
+    </div>
+  </div>
+  <p class="foot-copy">&copy; 2026 Pointegrity. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

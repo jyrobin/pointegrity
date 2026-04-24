@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One type system for app and content: why we picked IBM Plex — Pointegrity Journal</title>
+  <meta name="description" content="System fonts were the safe default. Inter was the obvious indie-SaaS pick. We went with Plex, and this post is set in it.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+    .kicker {
+      font-family: var(--font-mono); font-size: 0.7rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--color-neutral-500); margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 500;
+      color: var(--color-primary-800); letter-spacing: -0.015em;
+      line-height: 1.2; margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      font-family: var(--font-mono); font-size: 0.8rem;
+      color: var(--color-neutral-500); margin-bottom: 2.5rem;
+    }
+    .post-meta a { color: inherit; text-decoration: underline; }
+    .post-body { max-width: none; }
+    .post-body h2 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.5rem; color: var(--color-primary-700); }
+    .post-body h3 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: 0.35rem; color: var(--color-neutral-800); }
+    .post-body blockquote {
+      border-left: 3px solid var(--color-primary-300);
+      padding: 0 1rem; margin: 1.25rem 0; color: var(--color-neutral-700);
+    }
+    .post-body ul { padding-left: 1.25rem; margin: 0.75rem 0 1rem; }
+    .post-body li { margin: 0.35rem 0; }
+    .post-body code {
+      background: var(--color-neutral-100); padding: 0.1em 0.3em;
+      border-radius: 3px; font-size: 0.9em;
+    }
+    .post-body pre {
+      background: var(--color-neutral-100); padding: 0.75rem 1rem;
+      border-radius: var(--radius-md); overflow-x: auto; font-size: 0.85rem;
+    }
+    .post-body pre code { background: transparent; padding: 0; }
+    .post-body a { color: var(--color-primary-700); }
+    .post-body a:hover { text-decoration: underline; }
+
+    .back-link {
+      display: inline-block; margin-top: 3rem;
+      color: var(--color-primary-700); text-decoration: none; font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">One type system for app and content: why we picked IBM Plex</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-04-23">2026-04-23</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      Typography is one of those decisions where the defaults are
+      good enough and the temptation to overthink is strong. We
+      overthought it. The reason was not aesthetic vanity — it was
+      that pouch spans more content types than most SaaS products,
+      and no single default typeface handled all of them well.
+    </p>
+
+    <p>
+      This post is set in IBM Plex Serif. The UI of pouch renders
+      in Plex Sans. Code snippets throughout our docs are in Plex
+      Mono. All three are designed together, and that turns out to
+      matter more than it sounds.
+    </p>
+
+    <h2>The three contexts we had to serve</h2>
+
+    <p>
+      A pouch user encounters text in at least three registers:
+    </p>
+
+    <ul>
+      <li>
+        <strong>UI chrome</strong> — nav items, buttons, labels,
+        tooltips. Dense, small (13-15 px), sans-serif. Optimized for
+        glance-reading, not depth.
+      </li>
+      <li>
+        <strong>Long-form prose</strong> — this journal, the about
+        page, the Terms and Privacy pages. Larger (17-19 px), looser
+        line-height, narrower columns. Optimized for a sustained
+        read.
+      </li>
+      <li>
+        <strong>Code</strong> — monospace terminal output, drop
+        bodies with code blocks, eventually API examples and
+        technical docs. Needs real monospaced numerals and clear
+        character shapes at small sizes.
+      </li>
+    </ul>
+
+    <p>
+      A product that plans to grow into a content layer (we do) and
+      a developer-friendly CLI ecosystem (we do) needs to answer all
+      three questions coherently from the start.
+    </p>
+
+    <h2>The three options we considered</h2>
+
+    <h3>System fonts (system-ui / SF Pro / Segoe UI / Roboto)</h3>
+
+    <p>
+      System stacks are the boring right answer for a CSS library.
+      Zero network cost, platform-native, no foundries to pay, no
+      GDPR footnote about third-party font loading. We shipped the
+      site on system-ui for a week and everything worked. But two
+      problems emerged.
+    </p>
+
+    <p>
+      First: <em>no brand signal</em>. Pointegrity looked like every
+      other site built on a default design system. For a product
+      that positions itself on trust and sovereignty, being visually
+      interchangeable with everyone else is a small but real loss.
+    </p>
+
+    <p>
+      Second: <em>no coordinated serif or mono</em>. When we wanted
+      to render long-form prose (this journal), our only serif
+      options were Georgia or Cambria — general-purpose system
+      serifs that didn't sit alongside the sans we were using
+      anywhere. The compositions felt like unrelated families
+      stapled together.
+    </p>
+
+    <h3>Inter (+ JetBrains Mono)</h3>
+
+    <p>
+      Inter is the default indie-SaaS choice for good reason.
+      Clean, modern, readable at all sizes, neutral. Paired with
+      JetBrains Mono for code, you get a coherent enough
+      developer-product voice. Linear, Vercel, Stripe, GitHub all
+      use Inter or siblings.
+    </p>
+
+    <p>
+      The problem was Inter's lack of a matching serif. If we
+      committed to Inter now, we'd need to pick a second typeface
+      later when long-form content arrived — and pairing typefaces
+      well is harder than picking one family. The deferred decision
+      was more expensive than we wanted.
+    </p>
+
+    <h3>IBM Plex</h3>
+
+    <p>
+      Plex ships as a coordinated trio: Sans for UI, Serif for
+      editorial, Mono for code. They were designed together, so
+      mixing them on one page works without clashing. IBM released
+      Plex under the SIL Open Font License in 2018, which removed
+      the licensing uncertainty.
+    </p>
+
+    <p>
+      The practical win: we make one typography decision, once, and
+      it answers all three contexts. The UI uses Plex Sans. A long
+      post like this renders in Plex Serif (you're reading it now).
+      A code snippet below —
+    </p>
+
+    <pre><code>async function promote(drop) {
+  const res = await api.patch(`/api/items/${drop.id}`, {
+    stream: 'kept',
+  });
+  if (res.ok) toast('moved to kept');
+}</code></pre>
+
+    <p>
+      — picks up Plex Mono automatically, and you can tell from the
+      letterforms that it belongs to the same family. No visual
+      hiccup when the eye moves from prose to code.
+    </p>
+
+    <h2>What it cost us</h2>
+
+    <p>
+      Honestly: ~180 KB of woff2 files, self-hosted, loaded from our
+      own static directory. We serve the Latin and Latin-Extended
+      subsets for Sans (four weights), Serif (three weights), and
+      Mono (two weights). Each weight is ~15-25 KB gzipped. The
+      browser lazy-loads via <code>unicode-range</code> declarations
+      in our <code>@font-face</code> rules, so most page loads only
+      fetch the subset they need.
+    </p>
+
+    <p>
+      In concrete terms, the bundle cost is small enough that we
+      consider it essentially free, and self-hosting means we don't
+      send a Google Fonts request that would otherwise put a Google
+      dependency on every Pointegrity page. For a privacy-positioned
+      product, that's the right trade.
+    </p>
+
+    <h2>One thing we learned the hard way</h2>
+
+    <p>
+      Our logo wordmark is an SVG. Early versions used <code>&lt;text&gt;</code>
+      elements with <code>font-family: 'Inter'</code>, expecting the
+      browser to pick the right font. This silently broke on any
+      system without Inter installed — the text shifted by a few
+      pixels, which pushed the red accent-dot off-center relative
+      to the 'i' stem.
+    </p>
+
+    <p>
+      The fix was to extract the actual glyph paths from the woff2
+      file via <code>fontTools</code> and bake them into the SVG. No
+      more font-family dependency at render time; the SVG is now
+      self-contained. This is obvious in hindsight for any
+      production-shipped logo, but it took a bug report to
+      appreciate. If you're shipping SVG marks with live
+      <code>&lt;text&gt;</code>, convert to paths before public release.
+    </p>
+
+    <h2>What this decision closes off</h2>
+
+    <p>
+      Picking Plex means we're not picking:
+    </p>
+
+    <ul>
+      <li>A display typeface — we don't have one yet. Plex Sans at
+        weight 500 handles our hero heads; if we ever want something
+        more distinctive for top-of-funnel marketing pages, we'd add
+        a single display face, not replace the body.</li>
+      <li>A proprietary/paid typeface — Plex is OFL-licensed.
+        Commercial use is fine, redistributing is fine. No license
+        renewal calendar to track.</li>
+      <li>Variable-font sophistication — we ship static weights.
+        Could move to variable later if CSS animation or weight
+        interpolation becomes useful; doesn't today.</li>
+    </ul>
+
+    <h2>The one-line summary</h2>
+
+    <blockquote>
+      Pick a type system that can handle every surface you'll ship
+      in the next two years, not just the ones you have today.
+    </blockquote>
+
+    <p>
+      Pouch will eventually have a CLI reference, a tutorial section,
+      an API docs surface, and probably a blog bigger than this one.
+      Having Plex Sans + Serif + Mono sitting there ready means those
+      additions cost design time, not typography time. That's the
+      compounding return.
+    </p>
+
+  </div>
+
+  <a href="/journal" class="back-link">← All posts</a>
+
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="https://pouch.pointegrity.com">Pouch</a>
+      <a href="/legal/terms">Terms</a>
+      <a href="/legal/privacy">Privacy</a>
+      <a href="mailto:hello@pointegrity.com">hello@pointegrity.com</a>
+    </div>
+  </div>
+  <p class="foot-copy">&copy; 2026 Pointegrity. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

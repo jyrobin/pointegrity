@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Journal — Pointegrity</title>
+  <meta name="description" content="Decisions, reasoning, and work-in-progress notes from the team building Pouch at Pointegrity.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .journal-wrap { max-width: 44rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      display: inline-block;
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.02em;
+      margin: 0 0 0.5rem;
+    }
+    .page-intro {
+      color: var(--color-neutral-700);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      margin: 0 0 3rem;
+    }
+
+    .post-list { list-style: none; padding: 0; margin: 0; }
+    .post-list li {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--color-neutral-200);
+    }
+    .post-list li:last-child { border-bottom: none; }
+
+    .post-list time {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-neutral-500);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .post-list h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.3rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .post-list h2 a {
+      color: var(--color-primary-800);
+      text-decoration: none;
+    }
+    .post-list h2 a:hover { color: var(--color-primary-700); text-decoration: underline; }
+    .post-list p.excerpt {
+      color: var(--color-neutral-700);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    .subscribe {
+      margin-top: 3rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--color-primary-50);
+      border: 1px solid var(--color-primary-200);
+      border-radius: var(--radius-md);
+      color: var(--color-primary-900);
+      font-size: 0.95rem;
+    }
+    .subscribe a { color: var(--color-primary-800); font-weight: 500; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal" style="color: var(--color-primary-700);">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<div class="journal-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="page-title">Built in public.</h1>
+  <p class="page-intro">
+    Decisions, reasoning, and work-in-progress notes from the team building
+    <a href="https://pouch.pointegrity.com" style="color: var(--color-primary-700);">Pouch</a>
+    at Pointegrity. We publish what we figure out as we figure it out — including the
+    tradeoffs, the rejected options, and the things we changed our mind about.
+  </p>
+
+  <ul class="post-list">
+
+    <li>
+      <time datetime="2026-04-23">2026-04-23</time>
+      <h2><a href="/journal/2026-04-23-plex-for-app-and-content/">One type system for app and content: why we picked IBM Plex</a></h2>
+      <p class="excerpt">
+        We needed typography that works for both pouch's UI chrome and long-form
+        writing (this journal, future tutorials, legal pages). System fonts were
+        the cheap default; Inter was the indie-SaaS pick. We went with Plex — and
+        here's the reasoning.
+      </p>
+    </li>
+
+    <li>
+      <time datetime="2026-04-22">2026-04-22</time>
+      <h2><a href="/journal/2026-04-22-streams-not-folders/">Streams, not folders — why pouch chose policy lanes over hierarchy</a></h2>
+      <p class="excerpt">
+        Folders came up early as the obvious way to organize drops. We said no.
+        The alternative is streams — a dimension orthogonal to tags, where the
+        grouping unit carries policy (TTL, retention, eventually replication).
+        This is the decision that keeps pouch from drifting into note-app shape.
+      </p>
+    </li>
+
+    <li>
+      <time datetime="2026-04-21">2026-04-21</time>
+      <h2><a href="/journal/2026-04-21-what-pouch-is-and-isnt/">Why pouch: what it is, what it deliberately isn't</a></h2>
+      <p class="excerpt">
+        We kept getting pulled toward "note app" and "dropbox for small files" as
+        default framings. Neither was right. Pouch is a <em>personal data relay</em> —
+        ephemeral by default, durable by opt-in, yours to own. The positioning
+        decisions that cascade from that framing.
+      </p>
+    </li>
+
+  </ul>
+
+  <div class="subscribe">
+    <strong>Follow along:</strong> subscribe via <a href="/journal/feed.xml">RSS</a>,
+    or email <a href="mailto:hello@pointegrity.com">hello@pointegrity.com</a>
+    to get posts on launch. No newsletter system yet — we'll sort that out when
+    there's more to announce.
+  </div>
+
+</div>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="https://pouch.pointegrity.com">Pouch</a>
+      <a href="/legal/terms">Terms</a>
+      <a href="/legal/privacy">Privacy</a>
+      <a href="mailto:hello@pointegrity.com">hello@pointegrity.com</a>
+    </div>
+  </div>
+  <p class="foot-copy">&copy; 2026 Pointegrity. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

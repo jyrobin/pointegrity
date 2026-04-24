@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pointegrity Journal</title>
+    <link>https://www.pointegrity.com/journal</link>
+    <description>Decisions, reasoning, and work-in-progress notes from the team building Pouch at Pointegrity.</description>
+    <language>en-us</language>
+    <atom:link href="https://www.pointegrity.com/journal/feed.xml" rel="self" type="application/rss+xml"/>
+    <managingEditor>hello@pointegrity.com (Pointegrity)</managingEditor>
+    <webMaster>hello@pointegrity.com (Pointegrity)</webMaster>
+    <lastBuildDate>Thu, 23 Apr 2026 23:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>One type system for app and content: why we picked IBM Plex</title>
+      <link>https://www.pointegrity.com/journal/2026-04-23-plex-for-app-and-content/</link>
+      <guid isPermaLink="true">https://www.pointegrity.com/journal/2026-04-23-plex-for-app-and-content/</guid>
+      <pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate>
+      <description>System fonts were the safe default. Inter was the obvious indie-SaaS pick. We went with Plex — and this post is set in it. Why one coordinated family beats a stapled-together pair.</description>
+    </item>
+
+    <item>
+      <title>Streams, not folders — why pouch chose policy lanes over hierarchy</title>
+      <link>https://www.pointegrity.com/journal/2026-04-22-streams-not-folders/</link>
+      <guid isPermaLink="true">https://www.pointegrity.com/journal/2026-04-22-streams-not-folders/</guid>
+      <pubDate>Wed, 22 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Folders are the obvious default. Here's why pouch said no, and what a "stream" does that a folder doesn't. The decision that keeps pouch from drifting into note-app shape.</description>
+    </item>
+
+    <item>
+      <title>Why pouch: what it is, what it deliberately isn't</title>
+      <link>https://www.pointegrity.com/journal/2026-04-21-what-pouch-is-and-isnt/</link>
+      <guid isPermaLink="true">https://www.pointegrity.com/journal/2026-04-21-what-pouch-is-and-isnt/</guid>
+      <pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Pouch kept getting pulled toward "note app" or "dropbox" framings. Both were wrong. Here's what we chose instead — a "personal data relay" — and the product decisions that cascaded from it.</description>
+    </item>
+
+  </channel>
+</rss>
