@@ -175,13 +175,19 @@ body {
   letter-spacing: 0.04em;
   text-transform: lowercase;
 }
+/* Family colors — chosen so each tag matches the family's voice
+ * temperament rather than an arbitrary brand color:
+ *   pi   → cool slate (restrained, paper-quiet)
+ *   cura → warm pink/red (caring, hopeful, hot)
+ *   sc   → green (StoneCampus tradition)
+ */
 .family-tag-pi {
-  background: rgba(187, 24, 24, 0.10);     /* pi red */
-  color: #9b1c1c;
+  background: rgba(20, 78, 130, 0.10);     /* pi slate */
+  color: #1e4a72;
 }
 .family-tag-cura {
-  background: rgba(20, 78, 130, 0.10);     /* cura blue */
-  color: #1e4a72;
+  background: rgba(187, 24, 24, 0.10);     /* cura warm */
+  color: #9b1c1c;
 }
 .family-tag-sc {
   background: rgba(74, 112, 48, 0.12);     /* StoneCampus green */
@@ -190,8 +196,8 @@ body {
 
 /* Subtle border accent per family — gives the family some visual
  * weight without dominating. Tighter spacing to keep the row tidy. */
-.product.family-pi   { border-top: 3px solid #9b1c1c; padding-top: var(--space-4); }
-.product.family-cura { border-top: 3px solid #1e4a72; padding-top: var(--space-4); }
+.product.family-pi   { border-top: 3px solid #1e4a72; padding-top: var(--space-4); }
+.product.family-cura { border-top: 3px solid #9b1c1c; padding-top: var(--space-4); }
 .product.family-sc   { border-top: 3px solid #4f7c40; padding-top: var(--space-4); }
 
 /* The status pill needs to clear the family-tag visually when both
