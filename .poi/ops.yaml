@@ -1,0 +1,34 @@
+# pointegrity's poi-ops config — used by `poi-ops letterbox …`
+# subcommands to talk to the live newsletter-subscriber service.
+#
+# Secrets (LETTERBOX_ADMIN_KEY) live in ~/.config/poi-ops/auth.env
+# on the operator's Mac, not here. Per the secrets-out-of-git
+# discipline.
+
+host: liu
+storefront: ""
+cadence: monthly
+channels: []
+
+# Letterbox — newsletter-subscriber capture (cmd/letterbox).
+# - base_url: where the public service answers
+# - remote_db_path: SQLite file on host; used by the `backup` cmd
+# - remote_db_owner_sudo: true because the file is liu:liu mode 0600
+#   while the typical ssh login is `jy` — sudo -n sqlite3 .backup
+letterbox:
+  base_url: https://letterbox.pointegrity.com
+  remote_db_path: /home/liu/infra/pointegrityws/data/letterbox.db
+  remote_db_owner_sudo: true
+
+# SMTP — `hello@pointegrity.com` is the From for everything sent on
+# behalf of the brand (newsletter, future confirmation emails). Same
+# mailbox familiar and recital use on liu (/etc/default/familiar
+# carries identical host/user/from). Password lives in
+# ~/.config/poi-ops/auth.env as POINTEGRITY_SMTP_PASSWORD (the
+# per-app key wins over the bare SMTP_PASSWORD fallback per
+# poi-ops's smtpPassword resolver).
+smtp:
+  host: smtp.forwardemail.net
+  port: "465"
+  user: hello@pointegrity.com
+  from: hello@pointegrity.com
