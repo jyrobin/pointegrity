@@ -1,0 +1,24 @@
+[Unit]
+Description=Letterbox — Pointegrity newsletter subscriber capture
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=liu
+Group=liu
+WorkingDirectory=/home/liu/infra/pointegrityws/pointegrity
+EnvironmentFile=/etc/default/letterbox
+ExecStart=/home/liu/infra/pointegrityws/pointegrity/build/letterbox
+Restart=on-failure
+RestartSec=5
+
+# Hardening
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=yes
+ReadWritePaths=/home/liu/infra/pointegrityws/data
+
+[Install]
+WantedBy=multi-user.target

@@ -8,7 +8,15 @@
     <atom:link href="https://www.pointegrity.com/journal/feed.xml" rel="self" type="application/rss+xml"/>
     <managingEditor>hello@pointegrity.com (Pointegrity)</managingEditor>
     <webMaster>hello@pointegrity.com (Pointegrity)</webMaster>
-    <lastBuildDate>Fri, 24 Apr 2026 10:30:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2026 12:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>What we built while the journal was quiet</title>
+      <link>https://www.pointegrity.com/journal/2026-05-02-what-we-built-while-the-journal-was-quiet/</link>
+      <guid isPermaLink="true">https://www.pointegrity.com/journal/2026-05-02-what-we-built-while-the-journal-was-quiet/</guid>
+      <pubDate>Sat, 02 May 2026 12:00:00 +0000</pubDate>
+      <description>Ten days off the journal. A status report from the workshop floor: a visual-identity system shared across our app family, schema housekeeping in the auth library, real test coverage for previously-untested layers, and the honest answer to the marketing question. Plus a real subscribe form below.</description>
+    </item>
 
     <item>
       <title>Paid from day one: why pouch skipped the free tier</title>

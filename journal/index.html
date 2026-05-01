@@ -115,6 +115,18 @@
   <ul class="post-list">
 
     <li>
+      <time datetime="2026-05-02">2026-05-02</time>
+      <h2><a href="/journal/2026-05-02-what-we-built-while-the-journal-was-quiet/">What we built while the journal was quiet</a></h2>
+      <p class="excerpt">
+        Ten days off the journal. A status report from the workshop floor:
+        a visual-identity system shared across our app family, schema
+        housekeeping in the auth library, real test coverage for
+        previously-untested layers, and the honest answer to the
+        marketing question. Plus a real subscribe form below.
+      </p>
+    </li>
+
+    <li>
       <time datetime="2026-04-24">2026-04-24</time>
       <h2><a href="/journal/2026-04-24-paid-from-day-one/">Paid from day one: why pouch skipped the free tier</a></h2>
       <p class="excerpt">
@@ -161,10 +173,27 @@
   </ul>
 
   <div class="subscribe">
-    <strong>Follow along:</strong> subscribe via <a href="/journal/feed.xml">RSS</a>,
-    or email <a href="mailto:hello@pointegrity.com">hello@pointegrity.com</a>
-    to get posts on launch. No newsletter system yet — we'll sort that out when
-    there's more to announce.
+    <p style="margin: 0 0 0.6rem;"><strong>Follow along.</strong> A monthly
+    letter from the workshop — what shipped, what we're thinking about, links
+    to the month's posts. No tracking, no third-party tools. Unsubscribe via
+    a one-click link in any letter.</p>
+
+    <form action="https://letterbox.pointegrity.com/subscribe" method="POST"
+          style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.6rem;">
+      <input type="hidden" name="source" value="journal">
+      <input type="email" name="email" required autocomplete="email"
+             placeholder="you@example.com" aria-label="Your email"
+             style="flex: 1 1 16rem; padding: 0.5rem 0.7rem;
+                    border: 1px solid var(--color-neutral-300);
+                    border-radius: 4px; font: inherit;">
+      <button type="submit"
+              style="padding: 0.5rem 1.1rem; background: var(--color-primary-700);
+                     color: #fff; border: 0; border-radius: 4px; cursor: pointer;
+                     font: inherit;">Subscribe</button>
+    </form>
+
+    <p style="margin: 0.7rem 0 0; font-size: 0.85rem; color: var(--color-fg-muted);">
+    Prefer <a href="/journal/feed.xml">RSS</a>? Same posts, no email.</p>
   </div>
 
 </div>

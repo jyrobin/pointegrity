@@ -8,3 +8,9 @@
 # Local dev server artifacts
 /tmp/
 /.cache/
+
+# Letterbox build artifacts and SQLite DB.
+# /data/ MUST stay out of the repo — the live letterbox.db contains
+# subscriber email addresses. Public GH Pages repo would expose them.
+/build/
+/data/

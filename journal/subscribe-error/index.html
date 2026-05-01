@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Couldn't subscribe — Pointegrity</title>
+  <meta name="robots" content="noindex">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <style>
+    body { padding: 0; }
+    .wrap { max-width: 38rem; margin: 0 auto; padding: 4rem 1rem; }
+    h1 { color: var(--color-fg); margin: 0 0 1rem; }
+    p { line-height: 1.7; color: var(--color-fg); }
+    .muted { color: var(--color-fg-muted); font-size: 0.95rem; }
+    .actions { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .actions a {
+      padding: 0.5rem 1.1rem;
+      background: var(--color-primary-700);
+      color: #fff;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Couldn't subscribe.</h1>
+
+    <p>Something went wrong. Most often the email address didn't parse —
+    a typo or a missing <code>@</code>.</p>
+
+    <p class="muted">If you're sure the address is right, reply to
+    <a href="mailto:hello@pointegrity.com">hello@pointegrity.com</a> and
+    we'll add you by hand.</p>
+
+    <div class="actions">
+      <a href="/journal/">Try again</a>
+    </div>
+  </div>
+</body>
+</html>

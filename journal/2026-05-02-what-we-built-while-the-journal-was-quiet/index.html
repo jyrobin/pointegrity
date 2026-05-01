@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What we built while the journal was quiet — Pointegrity Journal</title>
+  <meta name="description" content="Ten days off the journal. A status report from the workshop floor: a visual-identity system for our app family, schema housekeeping in the auth lib, a real subscribe form below, and what's next.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-neutral-500);
+      margin-bottom: 2.5rem;
+    }
+    .post-meta a { color: inherit; text-decoration: underline; }
+
+    .post-body { max-width: none; }
+    .post-body h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-700);
+    }
+    .post-body code {
+      background: var(--color-neutral-100);
+      padding: 0.05em 0.35em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .post-body a { color: var(--color-primary-700); }
+    .post-body a:hover { text-decoration: underline; }
+
+    .family-table {
+      margin: 1rem 0 1.5rem;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .family-table th, .family-table td {
+      text-align: left;
+      padding: 0.4rem 1rem 0.4rem 0;
+      vertical-align: top;
+      border-bottom: 1px solid var(--color-neutral-200);
+    }
+    .family-table th { color: var(--color-fg-muted); font-weight: 500; }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      color: var(--color-primary-700);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">What we built while the journal was quiet</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-05-02">2026-05-02</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      It's been ten days since the last post. The gap was on purpose
+      — we were on the floor of the workshop, not at the desk where
+      the journal lives. This is a status report from that floor, and
+      a small admission: there's a backlog of "we should write about
+      that" topics from the last two weeks, and we're not going to
+      backfill them. They'll surface in future posts when the moment
+      is right. For now, what got done.
+    </p>
+
+    <h2>A visual identity for the family</h2>
+
+    <p>
+      Pointegrity ships several small apps, and until recently each
+      one looked like its own thing — different greens, different
+      type, different button shapes. That's normal early on. It also
+      stops being normal at some point.
+    </p>
+
+    <p>
+      We built a "family voice" system on top of our motif design
+      library: a single attribute on the page (<code>data-family</code>)
+      that swaps in a coherent palette + typography + decoration set
+      across an entire app. Three voices live there now:
+    </p>
+
+    <table class="family-table">
+      <tr><th>pi</th>
+          <td>Personal &amp; quiet — paper-cream surfaces, Plex Serif
+              titles, sage primary. Used by <em>pouch</em>.</td></tr>
+      <tr><th>cura</th>
+          <td>Caring &amp; warm — pi's silhouette in terracotta. Used
+              by <em>familiar</em> and <em>recital</em>.</td></tr>
+      <tr><th>sc</th>
+          <td>Editorial-academic — sage gradient header bands, italic
+              Plex Serif kickers, amber rules. Used by
+              <em>trellis</em>.</td></tr>
+    </table>
+
+    <p>
+      Adding a fourth app to one of these voices is now one line in
+      its boot config: <code>webCfg.Family = "pi"</code>. The whole
+      app — auth pages, marketing pages, the SPA shell — picks up the
+      voice. The reason this matters is mostly about not making four
+      separate visual-design decisions every time a small app gets
+      written. The reason it took so long is that getting the
+      palette + decoration + structural decisions right for two
+      voices, then forking gracefully into a third, was more work
+      than it looked.
+    </p>
+
+    <h2>Schema housekeeping that nobody saw</h2>
+
+    <p>
+      The auth library — shared across pouch, familiar, recital, and
+      our K-12 sister site trellis — was naming its session table
+      just <code>sessions</code>. Several of our apps have their own
+      domain concept of "sessions" (familiar's flashcard practice,
+      recital's recitation, future apps surely too), and SQLite's
+      <code>CREATE TABLE IF NOT EXISTS</code> turns a name collision
+      into a runtime mystery later.
+    </p>
+
+    <p>
+      We renamed the auth-library tables to <code>auth_sessions</code>
+      and <code>auth_sessions_kv</code>. Hard rename, no shims, no
+      real users yet. It's the kind of work that is invisible if it
+      goes well and crippling if it goes badly; we wrote the tests to
+      make sure it goes well, then ran the migration on the prod
+      database in a single <code>ALTER TABLE</code>. The whole thing
+      was anticlimactic, which is the goal.
+    </p>
+
+    <h2>Tests where there weren't any</h2>
+
+    <p>
+      The auth library's HTTP layer (the actual login/register
+      pages) and its SMTP message construction were both
+      uncovered by tests. Several recent bug-shaped scares
+      hadn't been caught by the existing service-level tests
+      because those tests use mocks that don't validate the
+      output URL or the email body.
+    </p>
+
+    <p>
+      The new tests cover: full register-and-verify flow against
+      the real handler stack, password-mismatch + missing-CSRF
+      branches, anti-enumeration on forgot-password, the SMTP
+      message bytes (headers, MIME version, line endings, body
+      content), and a guard that the family-voice attribute
+      actually lands in rendered HTML. Every previously-passing
+      test still passes; <code>auth/web</code> and
+      <code>auth/email</code> moved from "no test files" to
+      green.
+    </p>
+
+    <h2>The marketing question</h2>
+
+    <p>
+      We've also been thinking — quietly, mostly to each other —
+      about distribution. The honest summary: we don't have a
+      marketing problem yet, we have a "do we have product-market
+      fit on any of these apps" question. Trellis has a few users.
+      Pouch has near-zero. Familiar and recital are usable. The
+      right move isn't to push harder on marketing, it's to keep
+      building, keep the journal going, and trust that the people
+      we'd actually want to reach will find the work eventually.
+    </p>
+
+    <p>
+      That said, we do need somewhere for the early arrivals to
+      leave their email if they want a heads-up when something
+      meaningful ships. So we built a tiny self-hosted subscribe
+      service called <code>letterbox</code> — a Go binary, a
+      SQLite file, a single form, no third-party trackers. The
+      form is at the bottom of the <a href="/journal">journal
+      index</a> now. Plain HTML, no JavaScript, no cookies. The
+      list dump is a CSV. When it's time to send a letter, we'll
+      send a letter — by hand, the first few times.
+    </p>
+
+    <h2>What's next</h2>
+
+    <p>
+      The next app on the floor is <em>mytraces</em> — a personal
+      trip-planning tool, in the "tools for your data" cluster
+      with pouch. We're building it because we want to use it
+      ourselves, which is the strongest signal a tool can give
+      you. The journal will document the build as it happens.
+    </p>
+
+    <p>
+      In parallel: the journal cadence we're aiming for is roughly
+      biweekly — short when there's not much to say, long when
+      there is. The first monthly letter will go out at the end of
+      May, summarizing what shipped and pointing at the month's
+      posts. Subscribe below if that sounds useful.
+    </p>
+
+    <a class="back-link" href="/journal">&larr; All journal posts</a>
+
+  </div>
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/legal/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
