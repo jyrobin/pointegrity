@@ -14,3 +14,11 @@
 # subscriber email addresses. Public GH Pages repo would expose them.
 /build/
 /data/
+
+# Filled-in letters stay out of the public repo (subscribers see them
+# first; later they can be re-published as journal posts if you want).
+# The skeleton at letters/_template.md is committed; everything else
+# in letters/ except the README is ignored.
+/letters/*.md
+!/letters/_template.md
+!/letters/README.md
