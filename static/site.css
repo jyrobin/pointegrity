@@ -200,9 +200,12 @@ body {
 .product.family-cura { border-top: 3px solid #9b1c1c; padding-top: var(--space-4); }
 .product.family-sc   { border-top: 3px solid #4f7c40; padding-top: var(--space-4); }
 
-/* The status pill needs to clear the family-tag visually when both
- * are present — push it slightly down on cards that carry both. */
-.family-tag + h3 { margin-top: var(--space-3); }
+/* Family-tag is absolutely positioned at top-left of the card; the
+ * h3 below it needs enough breathing room that the tag and the
+ * title don't read as a single visual unit. space-3 was too tight
+ * — "pi" and "Pouch" optically merged. space-6 gives a clear
+ * pause. */
+.family-tag + h3 { margin-top: var(--space-6); }
 
 /* --- Tenets (philosophy) --- */
 .tenet {
