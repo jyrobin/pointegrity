@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The ontology and the model — Pointegrity Journal</title>
+  <meta name="description" content="A status report from inside mytraces, our internal trip-planning project. Why we're building it around two pillars — a curated ontology and an LLM — and how that decision is shaping the work.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      color: var(--color-neutral-500);
+      font-size: 0.85rem;
+      margin: 0 0 2rem;
+    }
+    .post-meta a { color: inherit; }
+
+    .prose p,
+    .prose ul,
+    .prose ol { line-height: 1.65; }
+    .prose h2 {
+      font-family: var(--font-display, "IBM Plex Serif", serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--color-primary-800);
+      margin: 2rem 0 0.75rem;
+    }
+    .prose code {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.92em;
+      background: var(--color-neutral-100, #f3f4f6);
+      padding: 0.05em 0.3em;
+      border-radius: 3px;
+    }
+    .prose em { color: var(--color-neutral-700); }
+
+    .pull {
+      border-left: 3px solid var(--color-secondary-500, #e8930d);
+      padding: 0.1rem 0 0.1rem 1rem;
+      margin: 1.25rem 0;
+      color: var(--color-neutral-700);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 2.5rem;
+      color: var(--color-primary-700);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">The ontology and the model</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-05-03">2026-05-03</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      A status report from another corner of the workshop. We've
+      been building a trip-planning project called
+      <em>mytraces</em> — internal for now, no public landing page,
+      no signup — and the design questions that have come up while
+      building it are general enough to be worth writing down.
+      This post is about the shape of the system, not its features.
+    </p>
+
+    <h2>The pull toward "just use the LLM"</h2>
+
+    <p>
+      Every recommendation problem these days has the same easy
+      first answer: ask the model. And it works. You can build a
+      surprisingly good trip planner by handing a query to a
+      capable LLM and asking it to write the day for you. We tried
+      that. It gave us reasonable mornings.
+    </p>
+
+    <p>
+      What it didn't give us was <em>reasons</em>. The same
+      question on Tuesday produced a different itinerary than the
+      same question on Friday. Nothing about our previous
+      decisions accumulated. When we asked "why this place,"
+      the answer was a paragraph that sounded right and might
+      have been made up. For a tool we wanted to actually use
+      ourselves on actual trips, that wasn't enough.
+    </p>
+
+    <h2>The other pillar: an ontology</h2>
+
+    <p>
+      So we built a second thing alongside the model — a curated
+      graph of travel concepts, with weighted relationships between
+      them, plus a list of curated places (instances) tagged with
+      those concepts. <em>Contemplative</em> is a concept.
+      <em>Alpine</em> is a concept. There's a relationship that
+      says "contemplative amplifies alpine," with a weight; another
+      that says "contemplative inhibits crowded." Yangmingshan
+      National Park is an instance; it's tagged
+      <em>alpine</em>, <em>forest-bathing</em>, <em>quiet</em>,
+      and a handful more.
+    </p>
+
+    <p>
+      When you tell the system you want a quiet day, it walks the
+      graph from that mood through the relationships to the
+      instances that score well, and shows you the chain it walked.
+      "Yangmingshan, because contemplative amplifies forest-bathing
+      and alpine; this site is tagged with both." You can disagree
+      with the chain. You can ask for a different mood. You can
+      see the reasoning.
+    </p>
+
+    <p>
+      The graph also accepts <em>regimes</em> — context dimensions
+      that modulate the relationship weights. Season is a regime
+      (the same alpine site is rated higher in spring than winter).
+      Group composition is one ("alpine + family-with-kids" is a
+      mismatch). Transit mode is one (a car-only site under "I'll
+      use the metro" gets demoted). Repeat-visitor status is one
+      (iconic must-sees fade for someone returning). Four axes,
+      each modest, each authored only where the curator has a
+      genuine signal. The system stays small.
+    </p>
+
+    <h2>What the model does in this picture</h2>
+
+    <p>
+      The ontology doesn't replace the model. It gives the model
+      vocabulary and a factual anchor. You type a free-form
+      sentence — <em>"I want a chill afternoon with my mom who
+      hates crowds"</em> — and the model parses it into the
+      structured signals the ontology speaks: a mood, a group
+      shape, a tone preference. The ontology runs propagation and
+      returns candidates with reasoning chains. The model then
+      composes those into prose, weaving in tone, sequencing,
+      pacing notes the ontology can't generate.
+    </p>
+
+    <div class="pull">
+      Two pillars, doing different jobs. Each is more useful
+      because the other exists.
+    </div>
+
+    <p>
+      The model handles the parts of language and composition that
+      a structured graph can't do well. The ontology handles the
+      parts of grounded recommendation a generative model can't do
+      transparently. The model gets <em>smarter</em> as the
+      ontology gets richer, not constrained — it has firmer
+      ground to stand on.
+    </p>
+
+    <h2>What's actually built</h2>
+
+    <p>
+      The current ontology is small on purpose: about 130 concepts
+      across five layers, around 120 weighted edges, four regime
+      axes, and roughly 90 curated places across Taiwan and Japan.
+      Per-user weight overlays exist as a structural layer (your
+      preferences drift independently of the cohort default). A
+      scenario suite runs the whole graph through hand-authored
+      "sensible answer" tests so we notice when something has
+      drifted. Curator-authored, not crawled. The point isn't
+      coverage; it's leverage.
+    </p>
+
+    <h2>What we're deliberately not building</h2>
+
+    <p>
+      Every instinct says <em>add more</em>. Most of those
+      instincts are wrong, and we've been disciplined about
+      saying so:
+    </p>
+
+    <ul>
+      <li>
+        We don't ontologize the long tail. Fengjia Night Market is
+        one place; the 200 food stalls inside are not 200
+        ontology nodes. The model + a notes layer handle that
+        altitude.
+      </li>
+      <li>
+        We don't author a concept for something the model can read
+        out of a place's description. Concepts exist to drive
+        propagation, not to label everything.
+      </li>
+      <li>
+        We don't add a regime axis without evidence that real
+        edges shift under it. Pace, duration, trip purpose — all
+        plausible regimes — are deliberately not in the system
+        yet.
+      </li>
+      <li>
+        We don't do live route planning. The user has a phone and
+        a maps app; we say "from your hotel, go to X" and let
+        them handle the route.
+      </li>
+      <li>
+        We don't book anything. No room rates, no availability,
+        no checkout. External references are links, not affiliate
+        flows.
+      </li>
+    </ul>
+
+    <h2>Where it goes from here</h2>
+
+    <p>
+      We're using mytraces ourselves before we open it. The
+      first real test is an actual day in Taichung — one of the
+      makers planning a one-night trip on the metro, ontology
+      providing the candidates, model composing the day,
+      everything else falling out as feedback. Whatever surfaces
+      will shape the next post. We expect surprises.
+    </p>
+
+    <p>
+      Internal dogfood until something is worth pointing at. The
+      two pillars feel right; we'll write again when one of them
+      has earned its keep. As always: small steps, no launches,
+      no big reveals — just notes from the workshop floor.
+    </p>
+
+    <a class="back-link" href="/journal">&larr; All journal posts</a>
+
+  </div>
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/legal/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
