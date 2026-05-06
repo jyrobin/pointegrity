@@ -8,7 +8,15 @@
     <atom:link href="https://www.pointegrity.com/journal/feed.xml" rel="self" type="application/rss+xml"/>
     <managingEditor>hello@pointegrity.com (Pointegrity)</managingEditor>
     <webMaster>hello@pointegrity.com (Pointegrity)</webMaster>
-    <lastBuildDate>Sun, 03 May 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 06 May 2026 12:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>The ontology pattern, in three domains</title>
+      <link>https://www.pointegrity.com/journal/2026-05-06-the-ontology-pattern-three-domains/</link>
+      <guid isPermaLink="true">https://www.pointegrity.com/journal/2026-05-06-the-ontology-pattern-three-domains/</guid>
+      <pubDate>Wed, 06 May 2026 12:00:00 +0000</pubDate>
+      <description>The same architecture we use in mytraces (travel) is now in two more places — trellis (pre-algebra) and a new sibling for programming. Why this shape keeps showing up in our work, and what it deliberately doesn't try to be.</description>
+    </item>
 
     <item>
       <title>The ontology and the model</title>

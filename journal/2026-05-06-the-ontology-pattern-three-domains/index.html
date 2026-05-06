@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The ontology pattern, in three domains — Pointegrity Journal</title>
+  <meta name="description" content="The same ontology architecture we use in mytraces (travel) is now in two more places: trellis (pre-algebra) and a new sibling for programming. Why this shape keeps showing up in our work.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      color: var(--color-neutral-500);
+      font-size: 0.85rem;
+      margin: 0 0 2rem;
+    }
+    .post-meta a { color: inherit; }
+
+    .prose p,
+    .prose ul,
+    .prose ol { line-height: 1.65; }
+    .prose h2 {
+      font-family: var(--font-display, "IBM Plex Serif", serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--color-primary-800);
+      margin: 2rem 0 0.75rem;
+    }
+    .prose code {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.92em;
+      background: var(--color-neutral-100, #f3f4f6);
+      padding: 0.05em 0.3em;
+      border-radius: 3px;
+    }
+    .prose em { color: var(--color-neutral-700); }
+
+    .pull {
+      border-left: 3px solid var(--color-secondary-500, #e8930d);
+      padding: 0.1rem 0 0.1rem 1rem;
+      margin: 1.25rem 0;
+      color: var(--color-neutral-700);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 2.5rem;
+      color: var(--color-primary-700);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">The ontology pattern, in three domains</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-05-06">2026-05-06</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      Last post was about <em>mytraces</em>: a travel-planning tool
+      built on a curated ontology and an LLM, doing different
+      jobs that each are more useful because the other exists. A
+      few people wrote in to ask whether that shape was unique to
+      trip planning or something we keep reaching for. Honest
+      answer: we keep reaching for it. The first time we used it
+      was actually <em>before</em> mytraces — for an education
+      tool that's been live for a while. A third instance just
+      landed, for programming. Three is enough that the pattern
+      is worth writing down on its own terms.
+    </p>
+
+    <h2>The shape, in one paragraph</h2>
+
+    <p>
+      A small graph of <em>concepts</em> in some domain, with
+      <em>typed relationships</em> between them
+      (<em>prereq</em>, <em>extends</em>, <em>co-occurs</em>, or
+      whatever the domain's edges turn out to be), and curated
+      <em>references</em> hanging off each node. A user has
+      <em>state</em> per concept: not-yet, learning, mastered,
+      stuck. <em>Regimes</em> project the same ontology onto
+      different audiences — same data, different filters and
+      weights. The whole thing is small enough to author by hand
+      and read on a Sunday afternoon. The system gets smarter as
+      the curator does, not as the corpus grows.
+    </p>
+
+    <p>
+      We've now built that shape three times.
+    </p>
+
+    <h2>One: pre-algebra (trellis)</h2>
+
+    <p>
+      <em>Trellis</em> was the first instance, and it's been
+      live for a while under the StoneCamp side of the workshop
+      — a small parent-shaped tool for K-12 math. Concepts are
+      the ~80 building-blocks of pre-algebra
+      (variables-and-expressions, fractions-on-a-number-line,
+      ratios-and-rates); the edges are <em>prereq</em> (you need
+      this first), <em>extends</em> (this deepens the previous),
+      <em>co-occurs</em> (these tend to cluster). References are
+      270+ hand-picked Khan Academy / OpenStax / Math Antics /
+      Math is Fun links. State is what you'd expect.
+    </p>
+
+    <p>
+      The shape held up. A parent who couldn't have read a
+      curriculum standard could read the map. A tutor running
+      three students didn't have to remember which prereqs were
+      sticking; the graph showed it. Trellis didn't need an LLM
+      to do its core job — the ontology alone was enough — and
+      that turns out to be the cleanest test of whether the
+      pattern is really earning its keep. If the graph is doing
+      the work, the model is a nice add-on. If you're leaning on
+      the model to compensate for a thin graph, you'd notice.
+      Trellis built our confidence that the pattern was load-
+      bearing on its own.
+    </p>
+
+    <h2>Two: travel (mytraces)</h2>
+
+    <p>
+      <em>Mytraces</em> took the same shape into a domain where
+      free-form natural language is the user's natural input.
+      Concepts are travel moods and place-types
+      (<em>contemplative</em>, <em>alpine</em>, <em>family-with-kids</em>);
+      relationships are weighted modulators
+      (<em>contemplative amplifies forest-bathing</em>); curated
+      places are the leaves; user state is preference drift.
+      Regimes are season, group, transit mode, repeat-visitor.
+      The new piece in this round was the model: the ontology
+      parses a typed sentence into structured signals, runs the
+      graph, and the model composes the reasoned candidates back
+      into prose. Two pillars, doing different jobs — last week's
+      post covered this in detail. Internal dogfood for now.
+    </p>
+
+    <h2>Three: programming</h2>
+
+    <p>
+      The new one is for programming. Same shape, very different
+      domain. The map covers ~80 concepts across the usual ten
+      groups (basics, collections, search/sort, data structures,
+      algorithms, OOP, software practice, networking, AI hands-on,
+      AI engineering); the edges are the same three types; the
+      references are field-standard (Python docs, MDN, cppreference,
+      Anthropic prompting guides, USACO Guide, AtCoder problem
+      links).
+    </p>
+
+    <p>
+      What's different is the audience axis. Pre-algebra has one
+      audience — a kid working through Common Core. Programming
+      has many: first-timer, working developer, AP Computer
+      Science A student, competitive programmer, AI engineer, CS
+      depth student. The same concept (say, <em>recursion</em> or
+      <em>dynamic programming</em>) shows up in most of those, but
+      with different surrounding context, different recommended
+      anchor language, different "what's next." So the regime
+      idea grew a bit: instead of one filter token per regime,
+      every concept now has a <em>level</em> (intro / core /
+      advanced) and a small set of <em>audience tags</em>
+      (<em>cp</em>, <em>apcs-tw</em>, <em>industry</em>,
+      <em>ai</em>, <em>web</em>). A regime is a six-line config
+      that picks groups, caps level, includes/excludes audiences.
+      Six tracks come out of the same ~80 concepts, no
+      duplication.
+    </p>
+
+    <div class="pull">
+      Same pattern, three domains. The work is in the curation,
+      not the engine.
+    </div>
+
+    <h2>What's shared, what isn't</h2>
+
+    <p>
+      Trellis and the programming sibling sit under the same
+      umbrella we publish education tools through (StoneCamp;
+      <em>grove</em> and <em>lithica</em> are quietly cooking next
+      to them). They share login, design language, and — newly —
+      a small JavaScript library that holds the d3 concept-graph,
+      the three-column layout, and the LHS tree. Each app brings
+      its own ontology, its own server, its own deploy. The
+      shared piece is just the chrome.
+    </p>
+
+    <p>
+      Mytraces stays separate; it's a different stack and a
+      different brand. The pattern travels, the implementation
+      doesn't have to. That's the right scale of sharing for a
+      small workshop: enough that we don't rebuild d3 graphs
+      three times, not so much that any one app holds the others
+      hostage.
+    </p>
+
+    <h2>Why this keeps winning</h2>
+
+    <p>
+      Three reasons. First: <em>the curator's understanding is
+      the leverage</em>. A handful of well-chosen concepts and
+      well-shaped edges does more than a million crawled facts.
+      The bar to add a node is "the curator can articulate why
+      it earns its place," and that bar is high enough to keep
+      the graph small.
+    </p>
+
+    <p>
+      Second: <em>the user can see the reasoning</em>. The map
+      shows you what's behind a "next-step" suggestion, what's
+      behind a place recommendation, what prereqs you need
+      before that ratios chapter pays off. The model alone
+      can't do that without sounding plausibly made up. The
+      graph forces transparency.
+    </p>
+
+    <p>
+      Third: <em>state persists</em>. Concept-state is the same
+      data shape across all three apps — per-(user, concept) with
+      an append-only history. We can timeline it, propagate it,
+      diff a classroom against an assignment. The same primitive
+      handles "which fractions topics has my child mastered" and
+      "which DP patterns is this APCS student stuck on." The
+      domain changes; the bookkeeping doesn't.
+    </p>
+
+    <h2>What we're deliberately leaving out</h2>
+
+    <p>
+      The programming sibling is intentionally pre-beta. Three
+      things we know we want, that we have <em>not</em> built:
+    </p>
+
+    <ul>
+      <li>
+        <em>An R3-style reasoner over the graph.</em> Tessera
+        could absolutely have an "ask about a concept" / "explain
+        this prereq path" mode driven by an LLM grounded in the
+        ontology — the same two-pillar shape mytraces uses. Not
+        before the graph itself has been used in anger.
+      </li>
+      <li>
+        <em>An ingest pipeline.</em> Authoring 200 AtCoder problems
+        by hand is slow; we know how to scrape + manifest +
+        review. We're holding off until the manual pace is the
+        actual bottleneck. Until then, manual is more accurate.
+      </li>
+      <li>
+        <em>A heavy classroom layer.</em> Tutors get a small
+        roster + per-assignment progress view; that's it. Anything
+        bigger means we're competing with grade-book tools, which
+        is not the work.
+      </li>
+    </ul>
+
+    <h2>Where it lands</h2>
+
+    <p>
+      The programming sibling will go to one tutor first — a
+      colleague who teaches APCS Taiwan students — for real
+      classroom use, not a demo. Trellis keeps doing what
+      trellis does. Mytraces stays internal until a planned trip
+      survives the system. The pattern is the part we're
+      confident about; the surface area of any one app is
+      deliberately narrow, and stays narrow until the curator
+      side proves out.
+    </p>
+
+    <p>
+      Three concept graphs, one architecture. We'll write again
+      when one of them has a story worth telling on its own.
+      Small steps; no launches; no big reveals — just notes from
+      the workshop floor.
+    </p>
+
+    <a class="back-link" href="/journal">&larr; All journal posts</a>
+
+  </div>
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/legal/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
