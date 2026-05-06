@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The ontology pattern, in three domains — Pointegrity Journal</title>
-  <meta name="description" content="The same ontology architecture we use in mytraces (travel) is now in two more places: trellis (pre-algebra) and a new sibling for programming. Why this shape keeps showing up in our work.">
+  <meta name="description" content="The same ontology architecture we use in mytraces (travel) shipped first as [sc] PreAlgebra (math), and now in a third domain — [sc] Programming. Why this shape keeps showing up in our work.">
 
   <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
@@ -138,33 +138,34 @@
       We've now built that shape three times.
     </p>
 
-    <h2>One: pre-algebra (trellis)</h2>
+    <h2>One: pre-algebra</h2>
 
     <p>
-      <em>Trellis</em> was the first instance, and it's been
-      live for a while under the StoneCamp side of the workshop
-      — a small parent-shaped tool for K-12 math. Concepts are
-      the ~80 building-blocks of pre-algebra
-      (variables-and-expressions, fractions-on-a-number-line,
-      ratios-and-rates); the edges are <em>prereq</em> (you need
-      this first), <em>extends</em> (this deepens the previous),
-      <em>co-occurs</em> (these tend to cluster). References are
-      270+ hand-picked Khan Academy / OpenStax / Math Antics /
-      Math is Fun links. State is what you'd expect.
+      The first instance, and the one that's been live for a
+      while, ships under the StoneCamp education family as
+      <em>[sc] PreAlgebra</em> — a small parent-shaped tool for
+      K-12 math. Concepts are the ~80 building-blocks of
+      pre-algebra (variables-and-expressions,
+      fractions-on-a-number-line, ratios-and-rates); the edges
+      are <em>prereq</em> (you need this first), <em>extends</em>
+      (this deepens the previous), <em>co-occurs</em> (these
+      tend to cluster). References are 270+ hand-picked Khan
+      Academy / OpenStax / Math Antics / Math is Fun links.
+      State is what you'd expect.
     </p>
 
     <p>
       The shape held up. A parent who couldn't have read a
       curriculum standard could read the map. A tutor running
       three students didn't have to remember which prereqs were
-      sticking; the graph showed it. Trellis didn't need an LLM
-      to do its core job — the ontology alone was enough — and
-      that turns out to be the cleanest test of whether the
+      sticking; the graph showed it. PreAlgebra didn't need an
+      LLM to do its core job — the ontology alone was enough —
+      and that turns out to be the cleanest test of whether the
       pattern is really earning its keep. If the graph is doing
-      the work, the model is a nice add-on. If you're leaning on
-      the model to compensate for a thin graph, you'd notice.
-      Trellis built our confidence that the pattern was load-
-      bearing on its own.
+      the work, the model is a nice add-on. If you're leaning
+      on the model to compensate for a thin graph, you'd
+      notice. The first instance built our confidence that the
+      pattern was load-bearing on its own.
     </p>
 
     <h2>Two: travel (mytraces)</h2>
@@ -188,14 +189,15 @@
     <h2>Three: programming</h2>
 
     <p>
-      The new one is for programming. Same shape, very different
-      domain. The map covers ~80 concepts across the usual ten
-      groups (basics, collections, search/sort, data structures,
-      algorithms, OOP, software practice, networking, AI hands-on,
-      AI engineering); the edges are the same three types; the
-      references are field-standard (Python docs, MDN, cppreference,
-      Anthropic prompting guides, USACO Guide, AtCoder problem
-      links).
+      The new one ships as <em>[sc] Programming</em> — same
+      family as PreAlgebra, very different domain. The map
+      covers ~80 concepts across the usual ten groups (basics,
+      collections, search/sort, data structures, algorithms,
+      OOP, software practice, networking, AI hands-on, AI
+      engineering); the edges are the same three types; the
+      references are field-standard (Python docs, MDN,
+      cppreference, Anthropic prompting guides, USACO Guide,
+      AtCoder problem links).
     </p>
 
     <p>
@@ -225,12 +227,12 @@
     <h2>What's shared, what isn't</h2>
 
     <p>
-      Trellis and the programming sibling sit under the same
-      umbrella we publish education tools through (StoneCamp;
-      <em>grove</em> and <em>lithica</em> are quietly cooking next
-      to them). They share login, design language, and — newly —
-      a small JavaScript library that holds the d3 concept-graph,
-      the three-column layout, and the LHS tree. Each app brings
+      PreAlgebra and Programming sit under the same umbrella we
+      publish education tools through (StoneCamp; <em>grove</em>
+      and <em>lithica</em> are quietly cooking next to them).
+      They share login, design language, and — newly — a small
+      internal library that holds the d3 concept-graph, the
+      three-column layout, and the LHS tree. Each app brings
       its own ontology, its own server, its own deploy. The
       shared piece is just the chrome.
     </p>
@@ -283,7 +285,7 @@
 
     <ul>
       <li>
-        <em>An R3-style reasoner over the graph.</em> Tessera
+        <em>An R3-style reasoner over the graph.</em> Programming
         could absolutely have an "ask about a concept" / "explain
         this prereq path" mode driven by an LLM grounded in the
         ontology — the same two-pillar shape mytraces uses. Not
@@ -306,14 +308,13 @@
     <h2>Where it lands</h2>
 
     <p>
-      The programming sibling will go to one tutor first — a
-      colleague who teaches APCS Taiwan students — for real
-      classroom use, not a demo. Trellis keeps doing what
-      trellis does. Mytraces stays internal until a planned trip
-      survives the system. The pattern is the part we're
-      confident about; the surface area of any one app is
-      deliberately narrow, and stays narrow until the curator
-      side proves out.
+      Programming will go to one tutor first — a colleague who
+      teaches APCS Taiwan students — for real classroom use, not
+      a demo. PreAlgebra keeps doing what it's been doing.
+      Mytraces stays internal until a planned trip survives the
+      system. The pattern is the part we're confident about; the
+      surface area of any one app is deliberately narrow, and
+      stays narrow until the curator side proves out.
     </p>
 
     <p>
