@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What the codebase remembers — Pointegrity Journal</title>
+  <meta name="description" content="A passing note about POI, the typed knowledge index our codebase has been quietly accumulating about itself. Not a product announcement — just notes from the workshop.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-neutral-500);
+      margin-bottom: 2.5rem;
+    }
+    .post-meta a { color: inherit; text-decoration: underline; }
+
+    .post-body { max-width: none; }
+    .post-body h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-700);
+    }
+    .post-body code {
+      background: var(--color-neutral-100);
+      padding: 0.05em 0.35em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .post-body a { color: var(--color-primary-700); }
+    .post-body a:hover { text-decoration: underline; }
+
+    .post-body ul.kinds {
+      margin: 0.5rem 0 1rem 0;
+      padding-left: 1.25rem;
+    }
+    .post-body ul.kinds li {
+      margin: 0.35rem 0;
+    }
+
+    .pull {
+      border-left: 3px solid var(--color-primary-300);
+      padding: 0.25rem 0 0.25rem 1rem;
+      margin: 1.25rem 0;
+      color: var(--color-neutral-700);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      color: var(--color-primary-700);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">What the codebase remembers</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-05-08">2026-05-08</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      A passing note from a quieter corner of the workshop. We've
+      been talking lately about what <em>pouch</em> holds, what
+      <em>mytraces</em> knows, what the family-voice system looks
+      like across our small apps. Alongside all of those — and
+      older than most of them — another internal tool has been
+      growing. We call it <strong>poi</strong>, short for
+      <em>Project Orientation &amp; Intelligence</em>. It's the
+      index our codebase keeps about itself. It's been around
+      for several iterations and we hadn't gotten around to
+      mentioning it.
+    </p>
+
+    <h2>The frustration</h2>
+
+    <p>
+      Every time we sit down with an AI assistant on this
+      codebase, the same family of mistakes shows up. It suggests
+      removing a build flag we settled on six weeks ago. It
+      re-opens a decision that lives in someone's head but not
+      anywhere mechanical. It writes code that crosses a
+      boundary we'd already drawn. The mistakes aren't really
+      the model's fault — the codebase doesn't have a place to
+      put institutional memory in a form the model can reliably
+      consult <em>before</em> the edit, rather than after.
+    </p>
+
+    <h2>What we tried first</h2>
+
+    <p>
+      The convention everyone uses is a <code>CLAUDE.md</code>
+      at the project root. We grew ours to ~600 lines and the
+      model still forgot half of it. Skills are good for
+      procedures (<code>/commit</code>, <code>/deploy</code>)
+      but less so for facts that need to fire when a specific
+      file is touched. Hooks check shapes; they don't carry
+      knowledge. Reading the README harder, you can imagine
+      how that went.
+    </p>
+
+    <h2>What's been brewing</h2>
+
+    <p>
+      POI is a typed knowledge index, one canonical YAML file
+      per module, sitting next to the code. The schema is small
+      and deliberate:
+    </p>
+
+    <ul class="kinds">
+      <li><strong>gotchas</strong> with file-glob triggers — "this
+        fires when you're about to edit
+        <code>internal/store/sqlite.go</code>"</li>
+      <li><strong>decisions</strong> with the options considered,
+        the one chosen, and why — so we stop re-litigating</li>
+      <li><strong>claims</strong> with <code>file:line</code>
+        evidence — mechanically verified; broken evidence is
+        rejected on ingest</li>
+      <li><strong>boundaries</strong> with deny/allow lists —
+        <code>poi boundary check &lt;file&gt; --import &lt;pkg&gt;</code>
+        is a real gate, exit 1 on violation</li>
+      <li><strong>non-features</strong> — the things this module
+        deliberately doesn't do, with rationale, so the agent
+        stops hallucinating them into existence</li>
+    </ul>
+
+    <p>
+      The YAML renders to a <code>DESIGN.md</code> you can publish
+      or read. The render is the publish step; humans edit the
+      typed YAML, not the rendered prose. A pre-commit hook
+      (<code>poi check</code>) blocks commits when the knowledge
+      and the rendered docs drift apart.
+    </p>
+
+    <p>
+      The piece that makes it not turn into auto-derived slop is
+      a propose / review / accept loop. An LLM (or a human)
+      drafts entries; they sit in a pending queue; a human runs
+      <code>poi review</code> and accepts what's right. The schema
+      enforces shape. The human enforces relevance.
+    </p>
+
+    <div class="pull">
+      The other day an agent was about to edit pouch's SQLite
+      store. POI surfaced the gotcha — <em>"mattn/go-sqlite3
+      needs <code>-tags fts5</code>; bare <code>go build</code>
+      silently omits FTS, queries fail at runtime"</em> — before
+      the edit happened. The build flag landed on the first try.
+      No detour through "wait, why is FTS broken now."
+    </div>
+
+    <h2>Where it sits today</h2>
+
+    <p>
+      Several iterations in. Schema v1 was prose-heavy. Schema v2
+      unified two earlier files into one canonical store. We've
+      shed pieces that turned out to be footguns — a global
+      focus environment variable nobody actually used; a
+      <code>brief</code> command that read from the rendered
+      artifact instead of the source. The most recent round
+      simplified the entry surface: bare <code>poi</code> inside
+      a module dir gives you that module's brief; bare
+      <code>poi</code> at the workspace root gives you the
+      overview; every command prints
+      <code>[workspace: X · scope: Y]</code> so you always know
+      what slice you're seeing.
+    </p>
+
+    <p>
+      Internal dogfood for now. It's used across the thirty-some
+      modules in our workspace — pouch, the ontology in
+      mytraces, the voice tooling, the auth library, even
+      POI's own knowledge about itself. It's become the thing we
+      reach for first when we sit down with the codebase. A few
+      people who've seen bits of it have asked whether they can
+      use it. We'll have more to say about that some other time.
+    </p>
+
+    <h2>The shape that keeps showing up</h2>
+
+    <p>
+      The recent post about
+      <a href="/journal/2026-05-03-the-ontology-and-the-model/">the
+      ontology and the model</a> was about giving an LLM a
+      curated structure to anchor on, in the travel domain.
+      POI is the same shape applied to a different domain: a
+      curated structure that anchors an AI assistant in the
+      facts of a codebase, instead of letting it improvise from
+      whatever it can reach. Two domains, same instinct — that
+      models are stronger when they have somewhere structured
+      to stand.
+    </p>
+
+    <p>
+      For now this is just a note that the tool exists and
+      we've been quietly building on it. We'll write about
+      it in more depth when there's something specific worth
+      saying.
+    </p>
+
+    <a class="back-link" href="/journal">&larr; All journal posts</a>
+
+  </div>
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/legal/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
