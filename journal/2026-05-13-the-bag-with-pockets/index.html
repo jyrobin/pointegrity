@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The bag, with pockets — Pointegrity Journal</title>
+  <meta name="description" content="A few days reshaping the pouch home view on the phone. Streams collapse into pockets, pinned items sit at the top without a label, search moved to a corner icon. Plus a small affordance that pays the biggest dividend.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-neutral-500);
+      margin-bottom: 2.5rem;
+    }
+    .post-meta a { color: inherit; text-decoration: underline; }
+
+    .post-body { max-width: none; }
+    .post-body h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-700);
+    }
+    .post-body code {
+      background: var(--color-neutral-100);
+      padding: 0.05em 0.35em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .post-body a { color: var(--color-primary-700); }
+    .post-body a:hover { text-decoration: underline; }
+
+    .pull {
+      border-left: 3px solid var(--color-primary-300);
+      padding: 0.25rem 0 0.25rem 1rem;
+      margin: 1.25rem 0;
+      color: var(--color-neutral-700);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      color: var(--color-primary-700);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">The bag, with pockets</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-05-13">2026-05-13</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      The phone surface of <a href="https://pouch.pointegrity.com">pouch</a>
+      has been usable but unfinished for a while. This week we sat
+      down with it specifically — not the engine room, not the
+      apps that talk to it; the home view on the actual phone. A
+      few days later the home reads more like a bag than a list.
+    </p>
+
+    <div class="pull">
+      The home view shouldn't ask you to read it; it should ask
+      you to reach in.
+    </div>
+
+    <h2>Pockets, not piles</h2>
+
+    <p>
+      Drops bound to a stream — every clip from a folder watcher,
+      every file from a scrape — used to show up as individual
+      rows on home. They crowded out the things that aren't
+      stream-bound: a quick note, a pinned reminder, a clipboard
+      fragment.
+    </p>
+
+    <p>
+      Now each stream collapses into one card on the home view:
+      <code>🌊 scrapes · 5 drops</code>. Tap to expand; the
+      latest few peek out, with a "see all" pointing into Browse
+      for the long tail. The pocket has its own shape; what's
+      inside stays in the pocket. The pouch root reads at one
+      scale; the streams read at theirs.
+    </p>
+
+    <h2>Pinned at the top, without a label</h2>
+
+    <p>
+      The old design wrote "Pinned" above the pinned items in
+      small caps. Now those drops just sit at the top with a
+      small green border and a 📌 in the corner. The cue carries
+      the meaning. A thin dashed rule separates pinned from
+      recent. About 24px of vertical real-estate gone — small
+      per app-open, but it compounds.
+    </p>
+
+    <h2>The corner search</h2>
+
+    <p>
+      Search used to live as a permanent strip below the topbar.
+      We never used it that way; search is an explicit verb, not
+      an ambient invitation. It now sits as a magnifying-glass
+      icon at the top right; tapping it opens a focused overlay
+      with a clear text input and the same tag-chip suggestions
+      underneath. The strip's 45px is back on the canvas.
+    </p>
+
+    <h2>On vaults (briefly)</h2>
+
+    <p>
+      The host-side daemon that mirrors pouch's bytes onto a
+      machine you own used to be called "anchor" in our codebase.
+      We renamed it to "vault" some time ago; the
+      <a href="https://pouch.pointegrity.com/docs/vaults">vaults
+      doc page</a> already reflects that. We've been re-thinking
+      what a vault is for and how several vaults relate to each
+      other on the same stream — replicas, transient relays,
+      "this machine produces, that machine archives." Nobody is
+      running one in anger outside of this workshop yet, so the
+      architecture work has been quiet. There'll be a post when
+      there's something specific worth saying.
+    </p>
+
+    <h2>The smallest visible change, the biggest payoff</h2>
+
+    <p>
+      The change that took the longest to figure out and the most
+      fun to ship is barely visible: a gear icon on every stream
+      card. Tap it and the home view "focuses" on that stream —
+      the FAB and drag-and-drop now route into that stream, not
+      the pouch root. "I want to add to this specific stream"
+      used to mean three taps and a picker; now it's one.
+    </p>
+
+    <p>
+      We almost added a separate action for it, or partitioned
+      the drop zone, or a third tab on the bottom nav. None of
+      those felt right. Borrowing the existing stream-settings
+      page as the focus surface gave us the affordance without
+      adding a primary verb. The streams are pockets; the gear
+      opens the pocket.
+    </p>
+
+    <h2>Where this is going</h2>
+
+    <p>
+      The phone is the primary entrance for the way most people
+      will use pouch. The desktop SPA will get the same
+      treatment, more visibly — different work, a different
+      post.
+    </p>
+
+    <p>
+      A few obvious surfaces are still rough: Browse could use a
+      better filter language, the share sheet wants a second
+      pass, and there's no proper "stream hub" page yet (the
+      gear takes you to the stream's settings, which is the
+      right place to focus from but the wrong place to read a
+      stream's drops at length). Each of those is a small
+      tightening, not a redesign. The bag's shape feels right
+      now.
+    </p>
+
+    <a class="back-link" href="/journal">&larr; All journal posts</a>
+
+  </div>
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/legal/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

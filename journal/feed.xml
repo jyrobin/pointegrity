@@ -8,7 +8,15 @@
     <atom:link href="https://www.pointegrity.com/journal/feed.xml" rel="self" type="application/rss+xml"/>
     <managingEditor>hello@pointegrity.com (Pointegrity)</managingEditor>
     <webMaster>hello@pointegrity.com (Pointegrity)</webMaster>
-    <lastBuildDate>Fri, 08 May 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 13 May 2026 12:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>The bag, with pockets</title>
+      <link>https://www.pointegrity.com/journal/2026-05-13-the-bag-with-pockets/</link>
+      <guid isPermaLink="true">https://www.pointegrity.com/journal/2026-05-13-the-bag-with-pockets/</guid>
+      <pubDate>Wed, 13 May 2026 12:00:00 +0000</pubDate>
+      <description>A few days reshaping the pouch home view on the phone. Stream-bound drops collapse into pockets, pinned items sit at the top without a label, search moved to a corner icon. Plus a small affordance — a gear on each stream card — that pays the biggest dividend.</description>
+    </item>
 
     <item>
       <title>What the codebase remembers</title>
