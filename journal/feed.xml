@@ -8,7 +8,15 @@
     <atom:link href="https://www.pointegrity.com/journal/feed.xml" rel="self" type="application/rss+xml"/>
     <managingEditor>hello@pointegrity.com (Pointegrity)</managingEditor>
     <webMaster>hello@pointegrity.com (Pointegrity)</webMaster>
-    <lastBuildDate>Wed, 13 May 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 17 May 2026 12:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>The state that hid behind the map</title>
+      <link>https://www.pointegrity.com/journal/2026-05-17-the-state-that-hid-behind-the-map/</link>
+      <guid isPermaLink="true">https://www.pointegrity.com/journal/2026-05-17-the-state-that-hid-behind-the-map/</guid>
+      <pubDate>Sun, 17 May 2026 12:00:00 +0000</pubDate>
+      <description>Notes from rebuilding the bottom sheet in mytraces, a trip-companion app shipping soon. A back-button gesture that opened a Discover modal turned out to be a follow-up tap landing on an invisible chip — and the chase exposed a deeper pattern in how state was scattered across modules. Three architectural slices later, a lesson about where view-coordinated state should live.</description>
+    </item>
 
     <item>
       <title>The bag, with pockets</title>

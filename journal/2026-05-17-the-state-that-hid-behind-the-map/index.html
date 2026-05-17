@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The state that hid behind the map — Pointegrity Journal</title>
+  <meta name="description" content="A week chasing a bug in mytraces, the trip-companion app we're shipping soon. The fix mattered less than what it taught us about where things should live.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-neutral-500);
+      margin-bottom: 2.5rem;
+    }
+    .post-meta a { color: inherit; text-decoration: underline; }
+
+    .post-body { max-width: none; }
+    .post-body h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-700);
+    }
+    .post-body code {
+      background: var(--color-neutral-100);
+      padding: 0.05em 0.35em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .post-body a { color: var(--color-primary-700); }
+    .post-body a:hover { text-decoration: underline; }
+
+    .pull {
+      border-left: 3px solid var(--color-primary-300);
+      padding: 0.25rem 0 0.25rem 1rem;
+      margin: 1.25rem 0;
+      color: var(--color-neutral-700);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      color: var(--color-primary-700);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">The state that hid behind the map</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-05-17">2026-05-17</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      We spent most of last week inside the bottom sheet of
+      <em>mytraces</em> — the trip-companion app we've been
+      writing alongside pouch. It's the newer cousin in the
+      family: same sage palette, same paper-cream feel, but
+      a much denser surface. A map. A sheet that slides up
+      from the bottom. A chip in the corner that follows
+      which stop you tapped. A column of shortcut chips for
+      "find food nearby" and "save this place." Small
+      pieces of state all needing to agree with each other.
+    </p>
+
+    <p>
+      They didn't agree. A user told us — politely — that
+      tapping the back arrow on the sheet sometimes opened
+      a full-screen "discover nearby" dialog. Which is not
+      a thing back arrows are supposed to do.
+    </p>
+
+    <div class="pull">
+      The bug wasn't in any one piece. It was in the
+      spaces between them.
+    </div>
+
+    <h2>How we got here</h2>
+
+    <p>
+      A quick aside, because we haven't told this part of
+      the story before.
+    </p>
+
+    <p>
+      Most of what you see across our apps lives in
+      <em>motif</em>: the shared design system — colors,
+      type, buttons, the look. We've mentioned it. What
+      we haven't mentioned is its quieter sibling,
+      <em>spakit</em>: the small toolkit that handles
+      <em>how</em> the apps move. URL changes, drawers
+      that slide in, modals that close when you tap
+      outside, the bottom sheet itself. About five hundred
+      lines, total. Deliberately small.
+    </p>
+
+    <p>
+      Spakit grew out of pouch when the mobile and desktop
+      apps both needed the same plumbing. Mytraces was the
+      first app to push on it hard — denser screens,
+      more moving parts. And like every spine, it pushed
+      back. Last week was the pushing.
+    </p>
+
+    <h2>The bug, told plainly</h2>
+
+    <p>
+      You're on the map. You've tapped a place; a sheet
+      slides up with details. You tap the back arrow at
+      the top of the sheet. The sheet retreats into its
+      simpler form — a list of the day's stops. So far,
+      so good.
+    </p>
+
+    <p>
+      Then, a moment later, you tap something else
+      anywhere on the screen, and a "what do you want to
+      find nearby?" dialog fills the screen. Where did it
+      come from?
+    </p>
+
+    <p>
+      We were sure we'd found the culprit the first
+      time. There's a small chip in the top-left of the
+      map — when no place is selected, it changes into a
+      "discover nearby" button. We figured: the back
+      arrow cleared the selection, the chip silently
+      turned into a discover button at the same spot,
+      the user's next tap landed on it. Cause found, fix
+      shipped.
+    </p>
+
+    <p>
+      Still happening.
+    </p>
+
+    <p>
+      The actual culprit was a column of shortcut chips
+      lower down on the map — "Eat nearby," "Save here."
+      They're supposed to disappear when the bottom sheet
+      is up. They <em>looked</em> like they disappeared.
+      They were just transparent. The tap area was still
+      there. Tapping in what looked like empty map space
+      was landing on an invisible "Eat nearby" chip — and
+      "eat nearby" opens the discover dialog.
+    </p>
+
+    <p>
+      Two words in the stylesheet had been arm-wrestling
+      each other and lost track of who was supposed to
+      win. We rewrote the rule, the chips actually hid,
+      and the bug went away. Anticlimactic.
+    </p>
+
+    <h2>What stayed with us</h2>
+
+    <p>
+      The fix was easy once we found it. The chase
+      wasn't. We'd gone after the wrong thing first
+      because two different pieces of UI — the corner
+      chip and the invisible bottom-left chip — could
+      both <em>look</em> like "the thing the user just
+      tapped after the back arrow." There was no single
+      place to ask "what is the screen actually doing
+      right now."
+    </p>
+
+    <p>
+      And there was a second bug riding along: picking a
+      day from inside the bottom sheet to focus on its
+      stops would sometimes <em>also</em> make the sheet
+      disappear. A different surface, the same shape of
+      problem. A tiny side-effect, attached to a routine
+      operation, with a much larger blast radius than it
+      should have had. Five steps across two files, each
+      one technically correct on its own; the chain not.
+    </p>
+
+    <p>
+      The way to make this class of bug stop happening
+      isn't more vigilance. It's giving each piece of the
+      UI <em>one</em> place to keep its state, and asking
+      it to mind its own business. The map keeps the
+      map's state. The sheet keeps the sheet's state.
+      Neither reaches into the other; if one needs to
+      react to the other, it watches, doesn't poke.
+    </p>
+
+    <h2>What we changed</h2>
+
+    <p>
+      Three small surgeries, after the chase.
+    </p>
+
+    <p>
+      The topbar now tells you where you are: the trip,
+      the day if you've focused on one, and the stop if
+      you've tapped one. It reads like a quiet
+      breadcrumb. It also doubles as a debug tool — if
+      something unexpected happens to the state, the
+      topbar shows it first. Cheap, useful both ways.
+    </p>
+
+    <p>
+      The map's markers know how to update themselves
+      when you change which day you're looking at,
+      without anyone having to tell them. They watch the
+      "which day" value directly. One fewer thread for
+      bugs to climb.
+    </p>
+
+    <p>
+      And the bottom sheet got the biggest surgery: its
+      "what mode am I in / how tall am I / am I open"
+      all became one piece of state instead of three.
+      The sheet's actual appearance is now a faithful
+      reflection of that state — nothing else writes to
+      the sheet directly. If the user does something
+      that should change how the sheet looks, the only
+      route is through that one piece of state.
+    </p>
+
+    <h2>Where this lands</h2>
+
+    <p>
+      Mytraces production is running on the cleaner
+      shape now. The bug is gone in a way that means
+      cousins of it won't easily reappear, because the
+      class of mistake that caused it isn't possible
+      anymore in the parts we cleaned up. (It's still
+      possible in other parts. We have a punch list.)
+    </p>
+
+    <p>
+      Mytraces itself, separately, is close to the
+      moment where we'll publish it for a wider
+      audience. <a href="https://mytraces.net">mytraces.net</a>
+      goes live shortly — it'll join pouch as the second
+      app in the Pointegrity family on its own
+      subdomain. The curated ontology behind it now
+      covers Taipei, Taichung, Kyoto, Tokyo, and a
+      handful of smaller regions. The trip planning
+      works. The map works. The bottom sheet — finally —
+      works.
+    </p>
+
+    <p>
+      The thing this week most clarified isn't a
+      feature. It's that when you grow a family of small
+      apps off a shared spine, the apps push the spine
+      and the spine pushes back. We sanded a seam.
+      Both sides got a little sharper. There will be
+      more weeks like this — every new app finds the
+      shared bits' tender spots in its own way — and
+      that's the work, when the spine is real.
+    </p>
+
+    <a class="back-link" href="/journal">&larr; All journal posts</a>
+
+  </div>
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/legal/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
