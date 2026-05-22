@@ -8,7 +8,15 @@
     <atom:link href="https://www.pointegrity.com/journal/feed.xml" rel="self" type="application/rss+xml"/>
     <managingEditor>hello@pointegrity.com (Pointegrity)</managingEditor>
     <webMaster>hello@pointegrity.com (Pointegrity)</webMaster>
-    <lastBuildDate>Sun, 17 May 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 22 May 2026 12:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>The attic, and the noise we found in it</title>
+      <link>https://www.pointegrity.com/journal/2026-05-22-the-attic-and-the-noise-we-found-in-it/</link>
+      <guid isPermaLink="true">https://www.pointegrity.com/journal/2026-05-22-the-attic-and-the-noise-we-found-in-it/</guid>
+      <pubDate>Fri, 22 May 2026 12:00:00 +0000</pubDate>
+      <description>We added a new piece to the family — not an app for customers, but the room behind the apps where the backups live. A polite email from Linode about high traffic turned into a small forensic dig: a few hundred megabytes of actual data was producing several hundred gigabytes of cross-city traffic a week. The mismatch was in how we'd set up the safety net, not in any of the apps. We sanded the seam.</description>
+    </item>
 
     <item>
       <title>The state that hid behind the map</title>

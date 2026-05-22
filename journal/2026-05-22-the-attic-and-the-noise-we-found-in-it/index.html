@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The attic, and the noise we found in it — Pointegrity Journal</title>
+  <meta name="description" content="We added a new piece to the family — not an app for customers, but the room behind the apps where the backups live. And the day Linode wrote to ask why it was so loud.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-neutral-500);
+      margin-bottom: 2.5rem;
+    }
+    .post-meta a { color: inherit; text-decoration: underline; }
+
+    .post-body { max-width: none; }
+    .post-body h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-700);
+    }
+    .post-body code {
+      background: var(--color-neutral-100);
+      padding: 0.05em 0.35em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .post-body a { color: var(--color-primary-700); }
+    .post-body a:hover { text-decoration: underline; }
+
+    .pull {
+      border-left: 3px solid var(--color-primary-300);
+      padding: 0.25rem 0 0.25rem 1rem;
+      margin: 1.25rem 0;
+      color: var(--color-neutral-700);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      color: var(--color-primary-700);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">The attic, and the noise we found in it</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-05-22">2026-05-22</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      Last week's post was about <em>mytraces</em> pushing on
+      the shared bits and the shared bits pushing back. This
+      week's is the same shape of story, but a level lower
+      down — and about a piece of the family that doesn't
+      have a customer-facing front door.
+    </p>
+
+    <p>
+      We've quietly been building a thing called <em>attic</em>.
+      It's not an app you'd ever buy. It's the room behind
+      the apps where the backups live. A small Go program
+      that runs on a few machines in different cities, takes
+      copies of each app's data, and keeps those copies in
+      sync. When a hard drive dies in Tokyo, the copies in
+      Los Angeles and Newark still know who we are.
+    </p>
+
+    <h2>Why a tool for this</h2>
+
+    <p>
+      The Pointegrity family is a bunch of small apps —
+      <a href="https://pouch.pointegrity.com">pouch</a>,
+      <a href="https://mytraces.net">mytraces</a>, the
+      authentication piece that signs you in to either, and
+      more in the workshop. Each one is small enough to live
+      on a single machine. We're not running the kind of
+      sprawling, always-on database that big platforms have
+      to. We don't want to be.
+    </p>
+
+    <p>
+      But "small enough to fit on one machine" only works if
+      we have a real story for "what happens when the machine
+      breaks." Attic is that story. The apps stay small; the
+      attic carries the safety net.
+    </p>
+
+    <div class="pull">
+      The apps stay small. The attic carries the safety net.
+    </div>
+
+    <h2>What we tried first</h2>
+
+    <p>
+      The first version we set up was the most careful one
+      we could think of. Every change a database made — a
+      new pouch, a new trace, a tagged photo — got shipped
+      off to safe storage the moment it happened. Three
+      separate cities held a copy each. Belt, braces, and a
+      third belt. We knew it was more careful than we
+      strictly needed, but careful felt right while we were
+      learning what we were doing.
+    </p>
+
+    <p>
+      It worked. For a few months, it just hummed along.
+    </p>
+
+    <h2>The polite email from Linode</h2>
+
+    <p>
+      Then last week, Linode wrote to us. (Linode hosts
+      those three machines.) The message was polite: <em>your
+      Tokyo server has been sending several hours of
+      high-rate traffic. Just letting you know.</em>
+    </p>
+
+    <p>
+      It had every right to ask. The traffic was big enough
+      that, if it kept going, it would have eaten through
+      the month's quota. We sat down to look.
+    </p>
+
+    <p>
+      The actual data we were protecting was small. A few
+      hundred megabytes, all in. About the size of a
+      thousand photos. The traffic shipping copies of it
+      around the world was, by then, several hundred
+      gigabytes a week. Several thousand times more
+      bandwidth than the data we were protecting could
+      possibly explain.
+    </p>
+
+    <h2>What was happening</h2>
+
+    <p>
+      The "ship every change" approach we'd picked turns
+      each change into its own tiny file. Thousands of tiny
+      files per day, per app. The storage system — three
+      cities, copies kept in sync — has to track every file
+      everywhere. Tracking a thousand tiny files is not the
+      same effort as tracking one big file with the same
+      total contents. There's a per-file tax, and then a
+      cross-city tax, and then they multiply.
+    </p>
+
+    <p>
+      Three small assumptions, each one reasonable in
+      isolation, had stacked into a much louder result
+      than any of them looked like alone. The thing wasn't
+      broken. It was working exactly as designed. The
+      design just didn't match the shape of our data —
+      lots of small apps, slow writes, no need to recover
+      to a particular second.
+    </p>
+
+    <p>
+      Anticlimactic, mostly.
+    </p>
+
+    <h2>What we changed</h2>
+
+    <p>
+      We stopped streaming every change. Each app's
+      database now gets one full snapshot a day — like
+      taking a clean photo of the whole notebook at
+      midnight, instead of photographing every word as
+      you write it.
+    </p>
+
+    <p>
+      Thirty backups in a month per database, instead of
+      thirteen thousand. The traffic dropped back to the
+      kind of trickle you'd expect for the actual amount
+      of data we're protecting. Linode hasn't written
+      again. The recovery story changed in one specific
+      way: if a machine dies, the worst case is now "we
+      lose up to yesterday's edits," not "we lose the
+      last few seconds." For apps where the data is your
+      drops, your trip plan, your saved places — that's
+      the right trade. For apps that take credit cards or
+      hospital readings, it wouldn't be. We don't have
+      those, yet, and when we do they'll bring their own
+      machinery.
+    </p>
+
+    <h2>What stays with us</h2>
+
+    <p>
+      Same shape as last week. The infrastructure we
+      built was right for a workload we might have
+      someday — bigger apps, always-on writes, a need to
+      recover to the second. It was wrong for the
+      workload we actually have today.
+    </p>
+
+    <p>
+      We sanded the seam. Both sides got a little
+      sharper. The attic is quieter, the apps don't know
+      anything changed, and we wrote down the lesson so
+      we don't walk into the same shape of mismatch the
+      next time the family grows.
+    </p>
+
+    <p>
+      Attic isn't a product. It's the room behind the
+      products. But for what we're trying to do — keep
+      building small, careful apps that each do one
+      thing, in a family that backs each other up — the
+      attic mattering quietly is exactly the right kind
+      of mattering.
+    </p>
+
+    <a class="back-link" href="/journal">&larr; All journal posts</a>
+
+  </div>
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/legal/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
