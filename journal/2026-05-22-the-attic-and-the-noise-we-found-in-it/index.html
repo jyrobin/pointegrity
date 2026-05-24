@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The attic, and the noise we found in it — Pointegrity Journal</title>
-  <meta name="description" content="We added a new piece to the family — not an app for customers, but the room behind the apps where the backups live. And the day Linode wrote to ask why it was so loud.">
+  <meta name="description" content="A new piece of the family: attic, the backup layer behind pouch, mytraces, and the rest. The day the cloud provider wrote to ask why it was so loud, and what we changed.">
 
   <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
@@ -106,98 +106,118 @@
     <p>
       Last week's post was about <em>mytraces</em> pushing on
       the shared bits and the shared bits pushing back. This
-      week's is the same shape of story, but a level lower
-      down — and about a piece of the family that doesn't
-      have a customer-facing front door.
+      week's is the same shape of story, a level lower down,
+      and about a piece of the family that runs behind the
+      apps rather than in front of them.
     </p>
 
     <p>
       We've quietly been building a thing called <em>attic</em>.
-      It's not an app you'd ever buy. It's the room behind
-      the apps where the backups live. A small Go program
-      that runs on a few machines in different cities, takes
-      copies of each app's data, and keeps those copies in
-      sync. When a hard drive dies in Tokyo, the copies in
-      Los Angeles and Newark still know who we are.
+      It's a small Go program that runs on a few hosts in
+      different regions, takes copies of each app's data, and
+      keeps those copies in sync. When a disk fails in one
+      region, the copies elsewhere still know who we are.
     </p>
 
     <h2>Why a tool for this</h2>
 
     <p>
-      The Pointegrity family is a bunch of small apps —
+      Across the Pointegrity family —
       <a href="https://pouch.pointegrity.com">pouch</a>,
       <a href="https://mytraces.net">mytraces</a>, the
       authentication piece that signs you in to either, and
-      more in the workshop. Each one is small enough to live
-      on a single machine. We're not running the kind of
-      sprawling, always-on database that big platforms have
-      to. We don't want to be.
+      more in the workshop — each app runs as its own service
+      with its own database. Some are growing. They share the
+      same need: durable backups, in more than one region, on
+      our terms.
     </p>
 
     <p>
-      But "small enough to fit on one machine" only works if
-      we have a real story for "what happens when the machine
-      breaks." Attic is that story. The apps stay small; the
-      attic carries the safety net.
+      Each app keeps its state in a single SQLite database —
+      one file, on one host, no live replicas. That's a
+      deliberate floor on operational cost. Until traffic
+      demands otherwise, we'd rather spend complexity budget
+      on the apps themselves than on running a database
+      cluster.
+    </p>
+
+    <p>
+      Attic is what carries the backup story. The apps don't
+      have to think about it; they just write to their own
+      databases, and the copies appear elsewhere on schedule.
     </p>
 
     <div class="pull">
-      The apps stay small. The attic carries the safety net.
+      The apps don't have to think about backups. The attic does.
     </div>
 
     <h2>What we tried first</h2>
 
     <p>
-      The first version we set up was the most careful one
-      we could think of. Every change a database made — a
-      new pouch, a new trace, a tagged photo — got shipped
-      off to safe storage the moment it happened. Three
-      separate cities held a copy each. Belt, braces, and a
-      third belt. We knew it was more careful than we
-      strictly needed, but careful felt right while we were
-      learning what we were doing.
+      There's a well-known pattern in the indie-SaaS world for
+      protecting a SQLite-backed app: stream every database
+      change — every transaction, every write-ahead log frame —
+      to an S3-compatible store in real time, replicated across
+      regions. The pitch is recovery to any specific second. We
+      picked it. It was the careful-looking option, and
+      "careful" felt right while we were learning what we were
+      doing.
     </p>
 
     <p>
       It worked. For a few months, it just hummed along.
     </p>
 
-    <h2>The polite email from Linode</h2>
+    <h2>The polite email</h2>
 
     <p>
-      Then last week, Linode wrote to us. (Linode hosts
-      those three machines.) The message was polite: <em>your
-      Tokyo server has been sending several hours of
-      high-rate traffic. Just letting you know.</em>
+      Then last week, our cloud provider wrote to us. The
+      message was polite: <em>one of your servers has been
+      sending several hours of high-rate outbound traffic.
+      Just letting you know.</em>
     </p>
 
     <p>
       It had every right to ask. The traffic was big enough
       that, if it kept going, it would have eaten through
-      the month's quota. We sat down to look.
+      the month's bandwidth allowance. We sat down to look.
     </p>
 
     <p>
       The actual data we were protecting was small. A few
-      hundred megabytes, all in. About the size of a
-      thousand photos. The traffic shipping copies of it
-      around the world was, by then, several hundred
-      gigabytes a week. Several thousand times more
-      bandwidth than the data we were protecting could
-      possibly explain.
+      hundred megabytes, all in. The traffic replicating
+      copies of it was, by then, several hundred gigabytes
+      a week — several thousand times more bandwidth than
+      the data we were protecting could possibly explain.
     </p>
 
     <h2>What was happening</h2>
 
     <p>
       The "ship every change" approach we'd picked turns
-      each change into its own tiny file. Thousands of tiny
-      files per day, per app. The storage system — three
-      cities, copies kept in sync — has to track every file
-      everywhere. Tracking a thousand tiny files is not the
-      same effort as tracking one big file with the same
-      total contents. There's a per-file tax, and then a
-      cross-city tax, and then they multiply.
+      each change into its own object in the storage layer.
+      Thousands of tiny objects per day, per app. The
+      replication layer underneath — three regions, copies
+      kept in sync — tracks every object across every
+      region. Per-object overhead is small; multiply it by
+      thousands of objects, then by three regions, then by
+      the way the layer reconciles its replicas, and the
+      tail wags the dog.
+    </p>
+
+    <p>
+      Most teams running this pattern aim it at a big cloud
+      provider's object-storage service — the provider
+      handles the metadata layer for them, the per-object
+      overhead is amortized inside their pricing, the bill
+      comes out to pennies. We weren't doing that; we were
+      running our own object-storage layer, replicated
+      across regions on our own hosts, for the
+      predictability and the not-leasing-our-durability
+      angle. The combination — thousands of tiny files plus
+      a storage layer optimized for fewer larger ones — was
+      the actual mismatch. Each piece, on its own, behaves
+      the way it's documented to.
     </p>
 
     <p>
@@ -218,26 +238,26 @@
 
     <p>
       We stopped streaming every change. Each app's
-      database now gets one full snapshot a day — like
-      taking a clean photo of the whole notebook at
-      midnight, instead of photographing every word as
-      you write it.
+      database now gets one full snapshot a day — one
+      consistent copy taken at a known moment, uploaded
+      as a single object, instead of thousands of tiny
+      ones representing every intermediate state.
     </p>
 
     <p>
       Thirty backups in a month per database, instead of
-      thirteen thousand. The traffic dropped back to the
-      kind of trickle you'd expect for the actual amount
-      of data we're protecting. Linode hasn't written
-      again. The recovery story changed in one specific
-      way: if a machine dies, the worst case is now "we
-      lose up to yesterday's edits," not "we lose the
-      last few seconds." For apps where the data is your
-      drops, your trip plan, your saved places — that's
-      the right trade. For apps that take credit cards or
-      hospital readings, it wouldn't be. We don't have
-      those, yet, and when we do they'll bring their own
-      machinery.
+      thirteen thousand. The traffic dropped to the kind
+      of trickle you'd expect for the actual amount of
+      data we're protecting. The alert hasn't come back.
+      The recovery story changed in one specific way: if
+      a host dies, the worst case is now "we lose up to
+      yesterday's edits," not "we lose the last few
+      seconds." For apps where the data is drops, trip
+      plans, saved places — that's the right trade. For
+      apps that take credit cards or hospital readings it
+      wouldn't be, and when those appear in the family
+      they'll bring their own machinery alongside attic,
+      not on top of it.
     </p>
 
     <h2>What stays with us</h2>
@@ -251,20 +271,16 @@
     </p>
 
     <p>
-      We sanded the seam. Both sides got a little
-      sharper. The attic is quieter, the apps don't know
-      anything changed, and we wrote down the lesson so
-      we don't walk into the same shape of mismatch the
-      next time the family grows.
+      We sanded the seam. The attic is quieter, the apps
+      don't know anything changed, and we wrote down the
+      lesson so we don't walk into the same shape of
+      mismatch the next time the family grows.
     </p>
 
     <p>
-      Attic isn't a product. It's the room behind the
-      products. But for what we're trying to do — keep
-      building small, careful apps that each do one
-      thing, in a family that backs each other up — the
-      attic mattering quietly is exactly the right kind
-      of mattering.
+      The attic is doing its job when nobody notices it.
+      That it stopped being noticeable this week is the
+      result we wanted.
     </p>
 
     <a class="back-link" href="/journal">&larr; All journal posts</a>

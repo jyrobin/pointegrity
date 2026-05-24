@@ -15,7 +15,7 @@
       <link>https://www.pointegrity.com/journal/2026-05-22-the-attic-and-the-noise-we-found-in-it/</link>
       <guid isPermaLink="true">https://www.pointegrity.com/journal/2026-05-22-the-attic-and-the-noise-we-found-in-it/</guid>
       <pubDate>Fri, 22 May 2026 12:00:00 +0000</pubDate>
-      <description>We added a new piece to the family — not an app for customers, but the room behind the apps where the backups live. A polite email from Linode about high traffic turned into a small forensic dig: a few hundred megabytes of actual data was producing several hundred gigabytes of cross-city traffic a week. The mismatch was in how we'd set up the safety net, not in any of the apps. We sanded the seam.</description>
+      <description>A new piece of the family: attic, the backup layer behind pouch, mytraces, and the rest. A polite email from the cloud provider about high outbound traffic turned into a small forensic dig — a few hundred megabytes of actual data was producing several hundred gigabytes of cross-region traffic a week. The mismatch was in how we'd set up the safety net, not in any of the apps.</description>
     </item>
 
     <item>
