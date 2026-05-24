@@ -89,6 +89,15 @@ body {
   color: var(--color-neutral-900);
   letter-spacing: -0.01em;
 }
+/* Optional lede paragraph under a section-title — used by the
+ * "On the side" games section to frame the small offerings
+ * tonally before the cards drop. */
+.section-lede {
+  margin: calc(-1 * var(--space-3, 0.75rem)) 0 var(--space-5, 1.5rem);
+  max-width: 38rem;
+  color: var(--color-neutral-600, #5a5a5a);
+  line-height: 1.55;
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
