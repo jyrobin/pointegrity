@@ -8,7 +8,15 @@
     <atom:link href="https://www.pointegrity.com/journal/feed.xml" rel="self" type="application/rss+xml"/>
     <managingEditor>hello@pointegrity.com (Pointegrity)</managingEditor>
     <webMaster>hello@pointegrity.com (Pointegrity)</webMaster>
-    <lastBuildDate>Fri, 22 May 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 May 2026 12:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>The games we kept in a drawer</title>
+      <link>https://www.pointegrity.com/journal/2026-05-25-the-games-we-kept-in-a-drawer/</link>
+      <guid isPermaLink="true">https://www.pointegrity.com/journal/2026-05-25-the-games-we-kept-in-a-drawer/</guid>
+      <pubDate>Mon, 25 May 2026 12:00:00 +0000</pubDate>
+      <description>A short break from the serious mini-apps. We dug two small math games out of the drawer and rebuilt them clean — Domino Solver, a partition puzzle, and Cat and Mouse, the 19th-century pursuit game Conway analysed in Winning Ways. Both a small collaboration with the Chiu Chang Mathematics Education Foundation, and a reminder of what a break is for.</description>
+    </item>
 
     <item>
       <title>The attic, and the noise we found in it</title>

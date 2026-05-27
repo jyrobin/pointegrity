@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The games we kept in a drawer — Pointegrity Journal</title>
+  <meta name="description" content="A short break from the serious mini-apps: we dug two small math games out of the drawer and rebuilt them — Domino Solver and Cat and Mouse — in collaboration with the Chiu Chang Mathematics Education Foundation.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-neutral-500);
+      margin-bottom: 2.5rem;
+    }
+    .post-meta a { color: inherit; text-decoration: underline; }
+
+    .post-body { max-width: none; }
+    .post-body h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-700);
+    }
+    .post-body code {
+      background: var(--color-neutral-100);
+      padding: 0.05em 0.35em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .post-body a { color: var(--color-primary-700); }
+    .post-body a:hover { text-decoration: underline; }
+
+    .pull {
+      border-left: 3px solid var(--color-primary-300);
+      padding: 0.25rem 0 0.25rem 1rem;
+      margin: 1.25rem 0;
+      color: var(--color-neutral-700);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      color: var(--color-primary-700);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">The games we kept in a drawer</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-05-25">2026-05-25</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      Most of what shows up here is the serious end of the
+      workshop — the relay that moves your drops, the trip
+      companion, the backup layer that keeps the copies honest.
+      This week is lighter. We had a lot of mini-apps in flight
+      at once, took a couple of days off the heavy lifting, and
+      revived two small math games instead.
+    </p>
+
+    <h2>Why games</h2>
+
+    <p>
+      There's a stretch you hit when you're building several
+      things at once where the days start to blur into one long
+      run of the same kind of careful — the same auth, the same
+      state machines, the same "what happens when this fails."
+      Games are a good palate cleanser. They're small, they're
+      <em>finishable</em>, and the only thing at stake is whether
+      they're any fun. After a few weeks of safety nets, that's
+      a real rest.
+    </p>
+
+    <div class="pull">
+      The worst outcome is that the puzzle was too easy.
+      That's a restful kind of worst outcome.
+    </div>
+
+    <h2>Two from the drawer</h2>
+
+    <p>
+      Neither of these is new, exactly. Both had an earlier life —
+      versions we'd built a while back and set aside. We dug them
+      out of the drawer, dusted them off, and rebuilt them clean
+      on the same toolkit the rest of the family runs on. New
+      paint, same bones. The history isn't worth dwelling on; the
+      point is they were too good to leave in a drawer.
+    </p>
+
+    <p>
+      <a href="https://dominosolver.pointegrity.com">Domino Solver</a>
+      is a partition puzzle: a grid of numbered cells you carve
+      into dominoes under a constraint, with a solver that shows
+      you the cascade when you drop a tile and the rest of the
+      board falls into place around it. Nine difficulty levels,
+      a small daily warm-up.
+    </p>
+
+    <p>
+      <a href="https://catmouse.pointegrity.com">Cat and Mouse</a>
+      is older still — a 19th-century pursuit game on an
+      eleven-square board that John Conway, Elwyn Berlekamp and
+      Richard Guy analysed in <em>Winning Ways</em>. Three cats
+      chase one mouse; the mouse moves first. Three computer
+      opponents, the hardest of which plays the strategy from the
+      book. It is harder than it looks, and losing to it is
+      strangely satisfying.
+    </p>
+
+    <h2>Made with Chiu Chang</h2>
+
+    <p>
+      Both games are a small collaboration with the
+      <a href="https://chiuchang.org/">Chiu Chang Mathematics
+      Education Foundation</a> — people who've spent decades on
+      math education and competition in the Chinese-speaking
+      world. The apps are tiny, but the through-line is theirs:
+      math you <em>play</em> rather than math you're taught. A
+      partition puzzle is combinatorics with the lecture removed;
+      a pursuit game is graph theory you can feel in your hands.
+    </p>
+
+    <p>
+      Both ship bilingual — English and 繁體中文 — and both keep
+      the deeper strategy notes one sign-in away, so the game
+      comes first and the lesson waits until you've had a few
+      rounds to want it.
+    </p>
+
+    <h2>What a break is for</h2>
+
+    <p>
+      There's a version of this job where you never stop shipping
+      the important thing. We don't think that version lasts.
+      Building something with no stakes — where nobody's data is
+      on the line and the failure mode is a puzzle that was too
+      easy — resets something. You come back to the serious work
+      with a clearer head and, usually, a small idea you wouldn't
+      have had at the desk.
+    </p>
+
+    <p>
+      They're live now, free to play, no account needed to start.
+      If you've got a few spare minutes and a fondness for small
+      math, go lose to the cats a couple of times. We'll be back
+      to the heavy lifting next week.
+    </p>
+
+    <a class="back-link" href="/journal">&larr; All journal posts</a>
+
+  </div>
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/legal/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
