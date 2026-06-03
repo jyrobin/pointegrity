@@ -22,3 +22,9 @@
 /letters/*.md
 !/letters/_template.md
 !/letters/README.md
+
+# poi:transient-state — managed by `poi admin gitignore`
+.poi/proposed.yaml
+.poi/proposed.yaml.bak
+.poi/data-loss.log
+# poi:transient-state-end
