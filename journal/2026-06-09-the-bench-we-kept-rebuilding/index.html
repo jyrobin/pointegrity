@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The bench we kept rebuilding — Pointegrity Journal</title>
+  <meta name="description" content="Several of our recent chat-and-canvas apps kept showing up with the same bones — different domain, same scaffold. liugent (liu as in 流, flow) is the scaffold factored out: a small Go bench plus a plugin slot where the domain lives. First plugin is internal, used live during TWSE hours. Notes from the workshop, not a product announcement.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-neutral-500);
+      margin-bottom: 2.5rem;
+    }
+    .post-meta a { color: inherit; text-decoration: underline; }
+
+    .post-body { max-width: none; }
+    .post-body h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-700);
+    }
+    .post-body code {
+      background: var(--color-neutral-100);
+      padding: 0.05em 0.35em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .post-body pre {
+      background: var(--color-neutral-100);
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-sm, 4px);
+      padding: 0.9rem 1rem;
+      overflow-x: auto;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      margin: 1.25rem 0;
+    }
+    .post-body pre code {
+      background: transparent;
+      padding: 0;
+      font-size: inherit;
+    }
+    .post-body a { color: var(--color-primary-700); }
+    .post-body a:hover { text-decoration: underline; }
+
+    .pull {
+      border-left: 3px solid var(--color-primary-300);
+      padding: 0.25rem 0 0.25rem 1rem;
+      margin: 1.25rem 0;
+      color: var(--color-neutral-700);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      color: var(--color-primary-700);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">The bench we kept rebuilding</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-06-09">2026-06-09</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      Plenty of what we ship has no chat UI at all — the
+      domain is the product, and the surface is bespoke.
+      Pouch's home view, attic's quiet backup pipeline, the
+      Chiu Chang math games: each is shaped around a thing
+      it's doing, not around a conversation. Those don't
+      share much chassis with each other, and that's fine.
+    </p>
+
+    <p>
+      The corner this post is about is different. Several of
+      the more recent things — a voice room, a sales-call
+      companion, an internal research console, a trip
+      companion's planner view — keep showing up with the same
+      bones. Chat-driven main column. Tools that emit either
+      text or a structured widget. A focus panel for when one
+      of those widgets is worth a closer look. A small history
+      that survives a reload. Different domain, same scaffold.
+      We kept rebuilding it.
+    </p>
+
+    <h2>liugent, the bench</h2>
+
+    <p>
+      <em>liugent</em> (the name is provisional, the thing is
+      brewing — <em>liu</em> as in 流, flow) is what we
+      factored out. A small Go server with a registry of
+      tools. A pnpm UI on top of motif. A WebSocket bus
+      between them. The interaction model is well-understood
+      by now: you type, a tool runs, it can emit text into the
+      conversation OR a structured block, structured blocks
+      get a widget, widgets can carry action buttons that send
+      commands back. None of that is novel. The novelty, if
+      there is any, is in not building it again.
+    </p>
+
+    <p>
+      The name points at where we want this to go. A lot of
+      AI-shaped software hides the flow — the model decides,
+      the user reacts to the output. We're more interested in
+      the opposite direction: making the flow visible enough
+      to steer, with the agent contributing where it's clearly
+      better than the human and the human staying in the loop
+      everywhere else. The bench is the part of that we can
+      build now; the steerable flow is the part we'll be
+      growing into.
+    </p>
+
+    <p>
+      What we wanted to make easy was the <em>domain</em> part.
+      A new app should be a plugin — a package that registers
+      tools, a handful of widget kinds the UI knows how to
+      render, and that's it. No chat framework decisions, no
+      canvas state machine, no WebSocket reconnect over Mac
+      sleep, no notebook persistence, no pin/rail/chip UI.
+      Those live in the bench.
+    </p>
+
+    <div class="pull">
+      A new app should be a plugin. The bench is what you stop
+      having an opinion about.
+    </div>
+
+    <h2>Internal use first</h2>
+
+    <p>
+      We're testing this idea where we always do — by using it
+      ourselves first. The first liugent plugin is a workbench
+      for one of us who follows the Taiwanese market: portfolios
+      of options and warrants, a playbook engine that scores
+      each leg against a configurable rule set, a live-quote
+      bridge to a broker, a notebook that survives the laptop
+      going to sleep. The plugin owns the domain math. The
+      bench owns everything else.
+    </p>
+
+    <p>
+      It's been a useful forcing function. The chassis couldn't
+      get too clever or too rigid because a real workflow was
+      running on it — open during TWSE day session, again
+      through the night session, again at the US close. A few
+      features got pulled in because we needed them (pin as
+      shortcut, scroll-restore on canvas close, auto-reconnect
+      with backoff). A few got pushed out because the plugin
+      could do them better — most of the domain math, which has
+      no business near the chassis.
+    </p>
+
+    <h2>What a tool emits</h2>
+
+    <p>
+      Here's roughly what the playbook tool returns, flattened
+      to text since we don't have a screencast ready. In the
+      live UI it's a widget, not a code block; in the journal
+      it'll have to do.
+    </p>
+
+<pre><code>trade-july  ·  1 suggestion
+Capital  NT$450,000  ·  Cash  NT$352,250 (78%)
+TP tiers (auto-mode)   stocks 20/40/80  ·  options 50/100/200
+
+Position
+  L2  45000C-2026-07  qty 1  ×50   entry 1,370  mark 1,795  +31%  DTE 37d
+  L1  39000P-2026-07  qty 1  ×50   entry   585  mark   530   -9%  DTE 37d
+
+Suggestion
+  HOLD  ·  no triggers
+  Distance to tier 1 on L2:  +14% on call mark  ≈  TXF +1.1%
+</code></pre>
+
+    <p>
+      That output is the plugin's. Everything around it — the
+      composer that sent the command, the notebook that holds
+      the chronological history, the canvas that you can open
+      to read it closely, the chip you can pin to come back to
+      this exact slot when the next refresh lands — is the
+      bench. Click "refresh" on the widget and the bench
+      re-emits the same command through the bus; the new block
+      arrives, the canvas swaps if it's open, the chip stays.
+      The plugin doesn't know any of that happened.
+    </p>
+
+    <h2>What we're watching</h2>
+
+    <p>
+      Two things will tell us whether we drew the line in the
+      right place.
+    </p>
+
+    <p>
+      The first is the plugin/bench boundary itself. We've
+      already had to move a couple of helpers across the line.
+      The shape of that motion — what wanted to live where —
+      tells us whether the boundary is real or imagined. The
+      current cut feels right. We'd rather be wrong twice than
+      not check.
+    </p>
+
+    <p>
+      The second is whether a second plugin will be as cheap to
+      add as we're betting. The first plugin always benefits
+      from incidental decisions made for it. The second plugin
+      pays the bill. When we add one we'll know whether the
+      bench was worth factoring out, or whether we just
+      relocated the duplication.
+    </p>
+
+    <h2>Where this leaves the journal</h2>
+
+    <p>
+      When specific apps are right for a public release, we'll
+      build them specifically — liugent's job is to not be in
+      the way during the years we're not. For now it's a quiet
+      thing in a corner of the workshop. The plugin is doing
+      real work daily; the chassis is being held to a higher
+      standard by being used every session. That's usually how
+      we know we've got the right thing brewing.
+    </p>
+
+    <p>
+      The rest of the workshop — pouch, attic, mytraces, the
+      Chiu Chang games — keeps moving in parallel; they don't
+      share liugent's chassis and most of them don't need to.
+      This was just a note from the corner we hadn't introduced yet.
+    </p>
+
+    <a class="back-link" href="/journal">&larr; All journal posts</a>
+
+  </div>
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/legal/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

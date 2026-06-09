@@ -8,7 +8,15 @@
     <atom:link href="https://www.pointegrity.com/journal/feed.xml" rel="self" type="application/rss+xml"/>
     <managingEditor>hello@pointegrity.com (Pointegrity)</managingEditor>
     <webMaster>hello@pointegrity.com (Pointegrity)</webMaster>
-    <lastBuildDate>Mon, 25 May 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2026 12:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>The bench we kept rebuilding</title>
+      <link>https://www.pointegrity.com/journal/2026-06-09-the-bench-we-kept-rebuilding/</link>
+      <guid isPermaLink="true">https://www.pointegrity.com/journal/2026-06-09-the-bench-we-kept-rebuilding/</guid>
+      <pubDate>Tue, 09 Jun 2026 12:00:00 +0000</pubDate>
+      <description>Several of our recent chat-and-canvas apps kept showing up with the same bones — different domain, same scaffold. liugent (liu as in 流, flow) is the scaffold factored out: a small Go bench plus a plugin slot where the domain lives. First plugin is internal, used live during TWSE hours. Notes from the workshop, not a product announcement.</description>
+    </item>
 
     <item>
       <title>The games we kept in a drawer</title>
