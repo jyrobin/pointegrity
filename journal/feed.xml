@@ -8,7 +8,15 @@
     <atom:link href="https://www.pointegrity.com/journal/feed.xml" rel="self" type="application/rss+xml"/>
     <managingEditor>hello@pointegrity.com (Pointegrity)</managingEditor>
     <webMaster>hello@pointegrity.com (Pointegrity)</webMaster>
-    <lastBuildDate>Tue, 09 Jun 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2026 12:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>Borrowing the shape, not the box</title>
+      <link>https://www.pointegrity.com/journal/2026-06-24-borrowing-the-shape-not-the-box/</link>
+      <guid isPermaLink="true">https://www.pointegrity.com/journal/2026-06-24-borrowing-the-shape-not-the-box/</guid>
+      <pubDate>Wed, 24 Jun 2026 12:00:00 +0000</pubDate>
+      <description>NotebookLM made the grounded-notebook surface general — point at your sources, chat, get cited answers. This is about the harder half: generalizing the depth. Structure-aware parsing instead of blunt chunks, typed entities projected from a stable layer and re-projected as the schema changes, answers that cite their sources, and a model that stays in the building. We borrowed the shape; the box was the part worth keeping.</description>
+    </item>
 
     <item>
       <title>The bench we kept rebuilding</title>

@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Borrowing the shape, not the box — Pointegrity Journal</title>
+  <meta name="description" content="NotebookLM made the grounded-notebook surface general — point at your sources, chat, get cited answers. This is about the harder half: generalizing the depth. Structure-aware parsing instead of blunt chunks, typed entities projected from a stable layer and re-projected as the schema changes, answers that cite their sources, and a model that stays in the building. We borrowed the shape; the box was the part worth keeping.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-neutral-500);
+      margin-bottom: 2.5rem;
+    }
+    .post-meta a { color: inherit; text-decoration: underline; }
+
+    .post-body { max-width: none; }
+    .post-body h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-700);
+    }
+    .post-body code {
+      background: var(--color-neutral-100);
+      padding: 0.05em 0.35em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .post-body pre {
+      background: var(--color-neutral-100);
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-sm, 4px);
+      padding: 0.9rem 1rem;
+      overflow-x: auto;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      margin: 1.25rem 0;
+    }
+    .post-body pre code {
+      background: transparent;
+      padding: 0;
+      font-size: inherit;
+    }
+    .post-body a { color: var(--color-primary-700); }
+    .post-body a:hover { text-decoration: underline; }
+
+    .pull {
+      border-left: 3px solid var(--color-primary-300);
+      padding: 0.25rem 0 0.25rem 1rem;
+      margin: 1.25rem 0;
+      color: var(--color-neutral-700);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      color: var(--color-primary-700);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">Borrowing the shape, not the box</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-06-24">2026-06-24</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      Retrieval systems all begin the same way: cut the documents
+      into chunks, find the ones that look relevant, answer from
+      those. The early chunks were blunt — fixed-size slices — and
+      the field has spent years making them less blunt, contextual
+      retrieval and the rest. We pushed from the document side:
+      parse a file into its actual structure — sections, summaries —
+      so a chunk is a unit that means something rather than an
+      arbitrary cut. Not for elegance, but because the questions we
+      cared about were precise — what a scholarship pays, who's
+      eligible — and precise answers fall apart on brutal slicing.
+    </p>
+
+    <p>
+      Then the general-purpose notebook arrived — NotebookLM, and
+      the shape it made familiar. Point it at your own sources, chat
+      over them, every answer footnoted back to a passage. No
+      project, no onboarding, no one preparing the documents first.
+      The surface for this kind of work had gone general — and the polish
+      kept heading toward turning your documents into something to
+      present. The part we cared about was heading the other way.
+    </p>
+
+    <p>
+      A surface going general is the easy thing to admire. The
+      question we found more interesting was the inverse one: not
+      whether the surface could generalize, but whether the
+      <em>depth</em> could — the structure, the entities — without
+      going shallow on the way. Some of it
+      generalized almost for free. Some of it you have to do on
+      purpose.
+    </p>
+
+    <h2>The footnote is a contract</h2>
+
+    <p>
+      Trust generalized easily. We have the model emit a small
+      handle — <code>[3]</code> — and let the <em>renderer</em>, not
+      the model, decide what <code>[3]</code> resolves to. The model
+      can be wrong about an answer; it can't be wrong about its own
+      sources, because it never gets to resolve its own citations.
+      And when nothing in your documents supports a claim, the honest
+      output is &ldquo;I don't have that in your sources&rdquo; — not
+      a confident guess. That single rule is what lets a small model
+      you can run yourself be trusted at all, and it's the same rule
+      in every domain. Trust didn't need a project.
+    </p>
+
+    <div class="pull">
+      The model can be wrong about the answer. It can't be wrong
+      about where it claims the answer came from.
+    </div>
+
+    <h2>Where it runs</h2>
+
+    <p>
+      So did the place it runs. The model, the index — an FTS5 table
+      and a notebook of sources — can stay in the building; none of
+      it has to leave. For some teams that's a preference; for others
+      it's the only reason they can use a thing like this at all.
+      That part you keep simply by not giving it away.
+    </p>
+
+    <h2>The part you generalize on purpose</h2>
+
+    <p>
+      The depth was the hard one, and it's the part still worth the
+      work. A notebook that only retrieves can quote, summarize, and
+      stop. But the questions people bring are often structural —
+      how many, which ones qualify, what's missing, does this meet
+      that — and those need the documents turned into something with
+      shape: typed entities you can count and compare, not snippets
+      you can paraphrase.
+    </p>
+
+    <p>
+      What made that tractable was keeping two layers apart. The
+      structure we parse out — sections and their summaries — is the
+      stable one; it sits close to the source and doesn't move when
+      the domain's questions change. The typed entities are
+      <em>projected</em> from it — derived, not carved into the
+      documents — so when the first schema turns out wrong, and it
+      always does, you re-project into the new shape instead of
+      re-reading anything. The first pass is rarely right; the point
+      is that the second pass is cheap.
+    </p>
+
+    <p>
+      That's what lets the depth generalize instead of staying
+      bespoke. Improve the parsing once — in general, or for a domain
+      that needs it — and a new domain becomes a schema and a handful
+      of examples projected onto structure that's already there. Not
+      a rebuild.
+    </p>
+
+    <div class="pull">
+      The surface generalizes for free. The depth you have to
+      generalize on purpose.
+    </div>
+
+    <h2>The corner this is from</h2>
+
+    <p>
+      This is the other corner of the workshop from the last note —
+      that one was about the bench under our chat apps; this is about
+      what runs on it when the work is knowledge. We borrowed the
+      shape gladly; it's a good shape, and we didn't need to reinvent
+      it. The box was the part worth keeping — the trust, the place it
+      runs, and the depth that, unlike the shape, never generalizes
+      itself.
+    </p>
+
+    <a class="back-link" href="/journal">&larr; All journal posts</a>
+
+  </div>
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/legal/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
