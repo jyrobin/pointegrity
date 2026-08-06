@@ -13,18 +13,18 @@
 //
 // Endpoints:
 //
-//   POST /subscribe         (form-encoded: email, name?, source?)
-//                           Stores row, 303-redirects to /journal/subscribed/.
-//   GET  /unsubscribe?t=... 303 to /journal/unsubscribed/ after deleting.
-//   GET  /list?key=...      Admin CSV dump (compares LETTERBOX_ADMIN_KEY).
-//   GET  /healthz           "ok"
+//	POST /subscribe         (form-encoded: email, name?, source?)
+//	                        Stores row, 303-redirects to /journal/subscribed/.
+//	GET  /unsubscribe?t=... 303 to /journal/unsubscribed/ after deleting.
+//	GET  /list?key=...      Admin CSV dump (compares LETTERBOX_ADMIN_KEY).
+//	GET  /healthz           "ok"
 //
 // Config via env vars:
 //
-//   LETTERBOX_ADDR       :3737 (default)
-//   LETTERBOX_DB         ./data/letterbox.db
-//   LETTERBOX_REDIRECT   https://www.pointegrity.com (no trailing slash)
-//   LETTERBOX_ADMIN_KEY  shared-secret for the /list dump
+//	LETTERBOX_ADDR       :3737 (default)
+//	LETTERBOX_DB         ./data/letterbox.db
+//	LETTERBOX_REDIRECT   https://www.pointegrity.com (no trailing slash)
+//	LETTERBOX_ADMIN_KEY  shared-secret for the /list dump
 //
 // Storage: a single SQLite file. Easy to back up (cp), easy to migrate
 // elsewhere (the binary is portable; the file is portable).
