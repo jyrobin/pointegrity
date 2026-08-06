@@ -13,6 +13,7 @@
 # /data/ MUST stay out of the repo — the live letterbox.db contains
 # subscriber email addresses. Public GH Pages repo would expose them.
 /build/
+/letterbox
 /data/
 
 # Filled-in letters stay out of the public repo (subscribers see them
