@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The part that got slower — Pointegrity Journal</title>
+  <meta name="description" content="AI assistants write code in seconds now, and the obvious conclusion is that everyone is faster. Writing was never the whole job — deciding whether the code is right used to come bundled with typing it, and now it does not. The slowdown is hard to feel from the inside, and better models make the surviving mistakes harder to see rather than fewer.">
+
+  <link rel="icon" href="/static/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/static/logo/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/static/logo/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="stylesheet" href="/static/motif/tokens.css">
+  <link rel="stylesheet" href="/static/motif/components.css">
+  <link rel="stylesheet" href="/static/motif/utilities.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <link rel="stylesheet" href="/static/site.css">
+
+  <link rel="alternate" type="application/rss+xml" title="Pointegrity journal" href="/journal/feed.xml">
+
+  <style>
+    body { padding: 0; }
+    .post-wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+    .kicker {
+      font-family: var(--font-mono, ui-monospace, monospace);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-neutral-500);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--color-primary-800);
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-neutral-500);
+      margin-bottom: 2.5rem;
+    }
+    .post-meta a { color: inherit; text-decoration: underline; }
+
+    .post-body { max-width: none; }
+    .post-body h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-700);
+    }
+    .post-body code {
+      background: var(--color-neutral-100);
+      padding: 0.05em 0.35em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .post-body pre {
+      background: var(--color-neutral-100);
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-sm, 4px);
+      padding: 0.9rem 1rem;
+      overflow-x: auto;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      margin: 1.25rem 0;
+    }
+    .post-body pre code {
+      background: transparent;
+      padding: 0;
+      font-size: inherit;
+    }
+    .post-body a { color: var(--color-primary-700); }
+    .post-body a:hover { text-decoration: underline; }
+
+    .pull {
+      border-left: 3px solid var(--color-primary-300);
+      padding: 0.25rem 0 0.25rem 1rem;
+      margin: 1.25rem 0;
+      color: var(--color-neutral-700);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      color: var(--color-primary-700);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="topnav wrap">
+  <a href="/" class="brand" aria-label="Pointegrity home"><img src="/static/logo/wordmark-red.svg" alt="Pointegrity"></a>
+  <nav class="links">
+    <a href="/#products">Products</a>
+    <a href="/journal">Journal</a>
+    <a href="/about">About</a>
+    <a href="https://pouch.pointegrity.com/pricing">Pricing</a>
+  </nav>
+</header>
+
+<article class="post-wrap">
+
+  <div class="kicker">Journal</div>
+  <h1 class="post-title">The part that got slower</h1>
+  <p class="post-meta">
+    Published <time datetime="2026-08-08">2026-08-08</time>
+    &middot; <a href="/journal">Back to journal</a>
+  </p>
+
+  <div class="prose post-body">
+
+    <p>
+      If you don't write software, here is roughly what a working
+      day looks like now for a lot of people who do. You describe
+      what you want in ordinary sentences — <em>add a login
+      screen</em>, <em>make the export handle empty files</em> —
+      and an AI assistant writes the code, runs it, fixes what it
+      broke, and hands you the result a minute later. It is not a
+      demo. It is most of a Tuesday.
+    </p>
+
+    <p>
+      The obvious conclusion is that everyone is enormously faster.
+      The obvious conclusion is where it gets interesting.
+    </p>
+
+    <h2>The part nobody mentions</h2>
+
+    <p>
+      Writing the code was never the whole job. Someone has to
+      decide whether the code is <em>right</em> — whether it does
+      what was meant, whether it quietly broke something three
+      files away, whether the approach will still make sense in
+      six months. That step used to be nearly free, because you
+      had already read every line as you typed it. It came bundled
+      with the writing.
+    </p>
+
+    <p>
+      Now the writing is close to instant and the checking is not.
+      Whatever the assistant produces still has to pass through
+      one human, at human speed. The work didn't disappear; it
+      moved to the end and piled up there. Teams find themselves
+      finishing more and shipping about the same, and the reason
+      is sitting in a queue of things nobody has looked at yet.
+    </p>
+
+    <h2>Why it doesn't feel that way</h2>
+
+    <p>
+      This is the part we find genuinely uncomfortable, and it
+      isn't carelessness. A good assistant doesn't just hand you
+      code — it hands you evidence of diligence. It lists the edge
+      cases it thought about. It runs the thing, watches it fail,
+      works out why, fixes it, and shows you the whole trail. Ask
+      for tests and it writes more of them than you would have
+      bothered with, and they pass. And debugging is exactly the
+      sort of work that takes years to get good at: patience, a
+      feel for where things go wrong, the discipline to check the
+      boring possibility first. Watching someone do that competently
+      is persuasive, and it should be — which is why the obvious
+      reply to all this is that the bugs are going down too, and
+      anyone still struggling is holding it wrong.
+    </p>
+
+    <p>
+      Some of that is true. What it can't do is check itself from
+      outside its own reading of the request: the code and the tests
+      come from the same understanding, so when the understanding is
+      slightly off they agree with each other and everything passes.
+      A green test suite says nothing you thought to check is
+      broken. That is worth a great deal, and it is not the same
+      claim as the work being right.
+    </p>
+
+    <p>
+      Underneath is something older than any of this. When somebody
+      else takes on the tedious work, we trust and stop looking.
+      That is what delegation <em>is</em>, and most of the time it
+      is correct — which is precisely why the exceptions get
+      through. The gaps that survive aren't the ones nobody
+      checked. They're the ones that were checked, plausibly, by
+      someone working from a slightly wrong idea of what was
+      wanted.
+    </p>
+
+    <p>
+      Each individual task really does go faster, and that's what
+      you feel. What you don't feel is the reading now stacked at
+      the end of every one.
+    </p>
+
+    <p>
+      And it gets subtler as the models get better, not simpler.
+      A weak assistant fails in obvious ways — nonsense function
+      names, code that won't run — and obvious failures are safe,
+      because you catch them in seconds. A strong one produces
+      something that reads well, matches the style of everything
+      around it, and is wrong in one place you had no particular
+      reason to look. Better models don't remove mistakes so much
+      as make the surviving ones harder to see, while quietly
+      raising your confidence at the same time.
+    </p>
+
+    <h2>What the assistant can't know</h2>
+
+    <p>
+      There's a second thing, and it's the one we keep running
+      into. An assistant can read every line of a codebase in
+      seconds — far faster than any of us. But a codebase only
+      records what was <em>built</em>. It has no way to record
+      what was <em>considered and rejected</em>, or which of its
+      patterns are deliberate rules versus accidents nobody has
+      cleaned up.
+    </p>
+
+    <p>
+      So the same conversations come back. Something we decided
+      against in March gets proposed again in August, confidently,
+      because nothing in the code says <em>we thought about that
+      and here's why not</em>. That isn't the model being
+      forgetful. The information was never written down anywhere
+      it could be found — it lived in a chat window, and chat
+      windows end.
+    </p>
+
+    <h2>The shape that keeps showing up</h2>
+
+    <p>
+      Back in May we mentioned
+      <a href="/journal/2026-05-08-what-the-codebase-remembers/">an
+      internal tool called poi</a> — a place beside our code where
+      those things get written down in a form a machine can
+      re-check later. Not documentation, which goes stale quietly
+      and takes nobody with it. Statements specific enough that
+      software can tell you when the code stops matching them.
+    </p>
+
+    <p>
+      It's the same instinct as
+      <a href="/journal/2026-05-03-the-ontology-and-the-model/">the
+      ontology work</a> and
+      <a href="/journal/2026-06-24-borrowing-the-shape-not-the-box/">the
+      notebook piece</a>: models do better work when there is
+      something structured to stand on, rather than improvising
+      from whatever they can reach. Different domains, same
+      instinct, arrived at three separate times.
+    </p>
+
+    <p>
+      That post ended by saying we'd write more when there was
+      something specific to say. There is a little now — poi has
+      been running against our own work for months, and it
+      recently became something you can install rather than
+      something we describe. We're not making a pitch of it yet.
+      It has been shaped entirely by one workshop's habits, and
+      that is a narrow sample.
+    </p>
+
+    <h2>Where this goes</h2>
+
+    <p>
+      For us the next stretch is unglamorous: keep using it on
+      real work, and find out which parts survive contact with
+      people who aren't us. Our guess is that most of what we
+      believe about this is a local habit wearing the costume of a
+      principle, and the only way to tell the difference is to
+      hand it to someone with different habits.
+    </p>
+
+    <p>
+      For the field, we genuinely don't know. The tooling for
+      <em>writing</em> software has moved further in three years
+      than in the twenty before it, and the tooling for deciding
+      whether the writing was any good has barely moved at all.
+      That gap might close from the direction everyone expects —
+      assistants that check their own work convincingly enough
+      that the question stops mattering. It might not close, and
+      we all get slowly better at reading things we didn't write.
+      It might turn out that the useful unit was never the code
+      at all, but the decisions around it, and the code becomes
+      the cheap part it already half is.
+    </p>
+
+    <p>
+      We don't have a view worth defending on which of those
+      happens. We mostly wanted to put the odd part on the record
+      while it's still odd: the bottleneck moved, it moved
+      somewhere hard to feel, and the tools improving makes it
+      quietly harder rather than easier. If that stops being true
+      we'll say so here.
+    </p>
+
+  </div>
+
+  <p><a href="/journal">&larr; All journal posts</a></p>
+</article>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <div>
+      <p class="foot-brand">Pointegrity</p>
+      <p class="foot-tag">Independent software. Based in Taiwan.</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/legal/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
